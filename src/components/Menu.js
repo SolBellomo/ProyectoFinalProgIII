@@ -15,19 +15,25 @@ class Menu extends Component {
         super(props);
         this.state = {
             logged: false,
+            user:'',
             
         }
     }
    
     register(email, password) {
-        auth
-          .createUserWithEmailAndPassword(email, password)
+        auth.createUserWithEmailAndPassword(email, password)
           .then((response) => {
               console.log(response);
-              this.setState({ logged: true })
+              console.log('logged');
+              this.setState({
+                  logged: true,
+                  user: response.user
+              })
           })
                                     
-          .catch((err) => console.log(err));
+          .catch((err) => 
+          console.log(err));
+          errorMessage: error.message
       }
 
    
@@ -37,6 +43,18 @@ class Menu extends Component {
     .then(() => this.setState({ logged: true }))
                             
     .catch((err) => console.log(err));
+    }
+
+    logout(){
+        auth.signOut()
+        .then( (res)=>{
+            this.setState({
+                user:'',
+                logueado: false,
+            })
+        }
+
+        )
     }
 
     
@@ -54,6 +72,7 @@ class Menu extends Component {
                 <Drawer.Navigator>
                      <Drawer.Screen options={{title: 'Login'}} name="Login" component={()=><Login login={(email,pass)=>this.login(email,pass)}/>} />
                     <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass)=>this.register(email,pass)} />} />
+                    <Drawer.Screen options={{title: 'Logout' }} name="Logout" component={()=><Profile user={this.state.userData} logout={ () => this.logout()}/>}/>
                 </Drawer.Navigator>
                 )}
             </>
