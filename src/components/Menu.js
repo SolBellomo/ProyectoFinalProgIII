@@ -50,11 +50,9 @@ class Menu extends Component {
         .then( (res)=>{
             this.setState({
                 user:'',
-                logueado: false,
+                logged: false,
             })
-        }
-
-        )
+        })
     }
 
     
@@ -64,15 +62,15 @@ class Menu extends Component {
             <>
                 {this.state.logged ? (
                 <Drawer.Navigator>
-                    <Drawer.Screen options={{title: 'Home'}} name="Home" component={()=><Home userData={this.state.userData}/>} />
-                    <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile userData={this.state.userData}/>} />
+                    <Drawer.Screen options={{title: 'Home'}} name="Home" component={()=><Home user={this.state.user}/>} />
+                    <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
                 </Drawer.Navigator>
                 
                 ) : ( 
                 <Drawer.Navigator>
                      <Drawer.Screen options={{title: 'Login'}} name="Login" component={()=><Login login={(email,pass)=>this.login(email,pass)}/>} />
                     <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass)=>this.register(email,pass)} />} />
-                    <Drawer.Screen options={{title: 'Logout' }} name="Logout" component={()=><Profile user={this.state.userData} logout={ () => this.logout()}/>}/>
+                    <Drawer.Screen options={{title: 'Home' }} name="Home" component={()=><Profile  />}/>
                 </Drawer.Navigator>
                 )}
             </>
