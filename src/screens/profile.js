@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Text, View, TouchableOpacity, StyleSheet, Touchable} from 'react-native'; 
-import { auth } from "../../firebase/config";
+import { auth } from "../firebase/config";
 
 
 class Profile extends Component {
@@ -14,9 +14,6 @@ class Profile extends Component {
     render(){
       console.log(this.props.logout);
         return (
-          
-            
-      
        
          <View>
               {/* <Text> {auth.currentUser.email}</Text> 

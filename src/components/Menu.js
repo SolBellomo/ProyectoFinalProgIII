@@ -5,7 +5,7 @@ import Home from '../screens/home';
 import Login from '../screens/login';
 import Register from '../screens/register';
 import Profile from '../screens/profile';
-import { auth, db } from "../../firebase/config";
+import { auth, db } from "../firebase/config";
 
 
 const Drawer = createDrawerNavigator();
@@ -31,12 +31,12 @@ class Menu extends Component {
               })
           })
                                     
-          .catch((err) => 
-          console.log(err));
-          errorMessage: error.message
-      }
+          .catch((err) => {
+            console.log(err)
+        })
+    }
 
-   
+
       login(email, password) {
     auth
     .signInWithEmailAndPassword(email, password)

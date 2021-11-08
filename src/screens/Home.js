@@ -11,10 +11,9 @@ class Home extends Component {
         return (
             
               <View>
-                    <Text>Home</Text>
+                    /*recorrer el array de post con flatlist*/
               </View>
-          
-
+        
           )
         }
     }
