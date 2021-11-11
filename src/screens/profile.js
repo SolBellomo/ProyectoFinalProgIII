@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Text, View, TouchableOpacity, StyleSheet, Touchable} from 'react-native'; 
-import { auth } from "../firebase/config";
+import { auth,db } from "../firebase/config";
 
 
 class Profile extends Component {
@@ -16,11 +16,11 @@ class Profile extends Component {
         return (
        
          <View>
-              {/* <Text> {auth.currentUser.email}</Text> 
-              <Text> Email: {this.props.user.email}</Text>
-              <Text> Usuario creado el: {this.props.user.metadata.creationTime}</Text>
-              <Text> Ultimo login: {this.props.user.metadata.lastSingInTime}</Text>
-              */}
+               
+              <Text> Email: {auth.currentUser.email}</Text>
+              {/* <Text> Usuario creado el: {db.currentUser.creationTime}</Text>
+              <Text> Ultimo login: {db.currentUser.lastSingInTime}</Text>  */}
+              
               <TouchableOpacity style={styles.button} onPress={() => this.props.logout()}>
               <Text style={styles.textButton}>Logout</Text>
 
