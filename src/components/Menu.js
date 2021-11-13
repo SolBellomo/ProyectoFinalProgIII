@@ -6,6 +6,7 @@ import Login from '../screens/login';
 import Register from '../screens/register';
 import Profile from '../screens/profile';
 import { auth, db } from "../firebase/config";
+import NewPostForm from '../screens/newpostform';
 
 
 const Drawer = createDrawerNavigator();
@@ -19,6 +20,28 @@ class Menu extends Component {
             
         }
     }
+
+    componentDidMount(){
+        auth.onAuthStateChanged((user) => {
+            console.log(user);
+            if(user !== null){
+                this.setState({
+                    logged: true,
+                    
+                }) 
+            } else {
+                this.setState({
+                    logged: false, 
+                    
+                
+            })
+          }
+        })
+    }
+    
+    
+        
+    
    
     register(email, password) {
         auth.createUserWithEmailAndPassword(email, password)
@@ -63,6 +86,7 @@ class Menu extends Component {
                 {this.state.logged ? (
                 <Drawer.Navigator>
                     <Drawer.Screen options={{title: 'Home'}} name="Home" component={()=><Home user={this.state.user}/>} />
+                    <Drawer.Screen options={{title: 'Nuevo Post'}} name="Nuevo Post" component={()=> <NewPostForm/> }/>
                     <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
                 </Drawer.Navigator>
                 
