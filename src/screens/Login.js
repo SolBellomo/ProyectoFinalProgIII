@@ -5,7 +5,15 @@ import {Text, View, TextInput, TouchableOpacity, StyleSheet,} from "react-native
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      email: '',
+      password: '',
+      error: '',
+    };
+  }
+
+  navigateToRegister() {
+    this.props.screenProps.navigation.navigate('Register')
   }
 
   render() {
@@ -22,6 +30,11 @@ class Login extends Component {
           keyboardType="email-address"
           secureTextEntry={true}
         />
+        <TouchableOpacity onPress={() => this.props.screenProps.navigation.navigate('Register')}>
+          <Text>
+              ¿No tenés una cuenta? Registrate
+          </Text>
+        </TouchableOpacity> 
         <TouchableOpacity
           style={styles.button}
           onPress={() => this.props.login(this.state.email, this.state.password)}

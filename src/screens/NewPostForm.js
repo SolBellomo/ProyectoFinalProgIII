@@ -1,7 +1,7 @@
-import { NavigationRouteContextComponent } from '@react-navigation/native"';
 import React, { Component } from 'react';
 import {View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { auth, db } from "../firebase/config";
+import MyCamera from "../screens/MyCamera";
 
 class NewPostForm extends Component {
     constructor(props) {
@@ -47,13 +47,22 @@ class NewPostForm extends Component {
                 <TextInput
                     style={styles.input}
                     onChangeText={(title)=>this.setState({title: title})}
-                    placeholder='Escribe aquí...'
+                    placeholder='Título'
                     keyboardType='default'
-                    multiline
                     value={this.state.title}    
-                    />
+                />
+                <TextInput
+                    style={styles.input}
+                    onChangeText={(text)=>this.setState({description: text})}
+                    placeholder='Descripción'
+                    keyboardType='default'
+                    multiline={true}
+                    value={this.state.description}    
+                />
                 <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
-                    <Text style={styles.textButton}>Guardar</Text>    
+                    <Text style={styles.textButton}>
+                        Postear
+                    </Text>    
                 </TouchableOpacity>
             </View>
         ))

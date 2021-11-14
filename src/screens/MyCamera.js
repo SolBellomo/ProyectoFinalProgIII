@@ -1,4 +1,4 @@
-import { Camera } from 'expo-camera';
+//import Camera from "expo-camera";
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import {storage} from '../firebase/config'

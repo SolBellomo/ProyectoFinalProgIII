@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import {View, StyleSheet} from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { auth, db } from "../firebase/config";
+
 import Home from '../screens/home';
 import Login from '../screens/login';
 import Register from '../screens/register';
 import Profile from '../screens/profile';
-import { auth, db } from "../firebase/config";
+import NewPostForm from '../screens/NewPostForm';
 
 
 const Drawer = createDrawerNavigator();
@@ -68,7 +70,8 @@ class Menu extends Component {
                 
                 ) : ( 
                 <Drawer.Navigator>
-                     <Drawer.Screen options={{title: 'Login'}} name="Login" component={()=><Login login={(email,pass)=>this.login(email,pass)}/>} />
+                    <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
+                    <Drawer.Screen name="Nuevo Post" component={(screenProps) => <NewPostForm screenProps={screenProps}/> } />
                     <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass)=>this.register(email,pass)} />} />
                     <Drawer.Screen options={{title: 'Home' }} name="Home" component={()=><Profile  />}/>
                 </Drawer.Navigator>
