@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { auth, db } from "../firebase/config";
 
@@ -13,12 +13,14 @@ import NewPostForm from '../screens/NewPostForm';
 const Drawer = createDrawerNavigator();
 
 class Menu extends Component {
+
     constructor(props) {
         super(props);
         this.state = {
             logged: false,
-            user:'',
-            
+            user: '',
+            errorMessage: '',
+            errorCode: '',
         }
     }
    
@@ -34,22 +36,38 @@ class Menu extends Component {
           })
                                     
           .catch((err) => {
-            console.log(err)
+            console.log(err);
+            this.setState({
+                errorMessage: error.message,
+                errorCode: error.code,
+            })
         })
     }
 
-
-      login(email, password) {
-    auth
-    .signInWithEmailAndPassword(email, password)
-    .then(() => this.setState({ logged: true }))
+    login(email, password) {
+        auth
+        .signInWithEmailAndPassword(email, password)
+        .then((response) => {
+            console.log('logueado')
+            console.log('response')
+            this.setState({
+                logged: true,
+                user: response.user,
+            })
+        })
                             
-    .catch((err) => console.log(err));
+        .catch((err) => {
+            console.log(err);
+            this.setState({
+                errorMessage: error.message,
+                errorCode: error.code,
+            })
+        })
     }
 
     logout(){
         auth.signOut()
-        .then( (res)=>{
+        .then(()=>{
             this.setState({
                 user:'',
                 logged: false,
@@ -57,10 +75,29 @@ class Menu extends Component {
         })
     }
 
-    
-
     render() {
         return (
+            /*
+            <>
+                {this.state.logged ? (
+                <Drawer.Navigator>
+                    <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
+                    <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass)=>this.register(email,pass)} />} />
+
+                </Drawer.Navigator>
+                
+                ) : ( 
+                <Drawer.Navigator>
+                    <Drawer.Screen options={{title: 'Home'}} name="Home" component={()=><Home user={this.state.user}/>} />
+                    
+                    <Drawer.Screen name="Nuevo Post" component={(screenProps) => <NewPostForm screenProps={screenProps}/> } />
+
+                    <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
+                </Drawer.Navigator>
+                )}
+                
+            </>
+            */
             <>
                 {this.state.logged ? (
                 <Drawer.Navigator>
@@ -75,10 +112,10 @@ class Menu extends Component {
                     <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass)=>this.register(email,pass)} />} />
                     <Drawer.Screen options={{title: 'Home' }} name="Home" component={()=><Profile  />}/>
                 </Drawer.Navigator>
-                )}
+                )
+            }
             </>
-        );
-    }
+        )}
 }
 
 const styles = StyleSheet.create({})

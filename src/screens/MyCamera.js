@@ -1,4 +1,4 @@
-//import Camera from "expo-camera";
+import Camera from "expo-camera";
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import {storage} from '../firebase/config'
@@ -10,6 +10,9 @@ class MyCamera extends Component {
         this.state={
             permission: false,
             photo: '',
+
+            errorMessage: '',
+            errorCode: '',
         }
         this.camera; //es una referencia a la cámara que en este momento está vacía
     }
@@ -29,10 +32,20 @@ class MyCamera extends Component {
             .then((photo) => {
                 console.log(photo);
                 this.setState(
-                    {photo: photo.uri,}
+                    {
+                        photo: photo.uri,
+                        showCamera: false, 
+                    }
                 );
             })
-            .catch((err) => console.log(err))
+
+            .catch((err) => {
+                console.log(err);
+                this.setState({
+                    errorMessage: error.message,
+                    errorCode: error.code,
+                })
+            })
     }
 
     savePicture() {
@@ -51,7 +64,18 @@ class MyCamera extends Component {
                             });
                     })
             })
-        .catch((err)=> console.log(err))
+
+            .catch((err) => {
+                console.log(err);
+                this.setState({
+                    errorMessage: error.message,
+                    errorCode: error.code,
+                })
+            })
+    }
+
+    clearPicture(){
+
     }
 
     render () {
@@ -64,11 +88,11 @@ class MyCamera extends Component {
                             source={{uri: this.state.photo}}
                         />
                         <View>
-                            <TouchableOpacity onPress={() => this.savePicture }>
+                            <TouchableOpacity onPress={() => this.savePicture() }>
                                 <Text> Aceptar
                                 </Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress={() => this.clearPicture() }>
                                 <Text>Cancelar</Text>
                             </TouchableOpacity>
                         </View>

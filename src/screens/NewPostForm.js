@@ -10,6 +10,7 @@ class NewPostForm extends Component {
             title: '',
             description: '',
             showCamera: true,
+            url: '',
         }
     }
     
@@ -42,7 +43,8 @@ class NewPostForm extends Component {
 
     render(){
         return(
-            this.state.showCamera ? ( < MyCamera /> ) : (
+            
+            this.state.showCamera ? ( < MyCamera onImageUpload={(url) => this.onImageUpload(url)}/> ) : (
             <View style={styles.formContainer}>
                 <TextInput
                     style={styles.input}
