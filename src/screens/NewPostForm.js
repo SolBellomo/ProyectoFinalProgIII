@@ -68,7 +68,7 @@ class NewPostForm extends Component {
                     </Text>    
                 </TouchableOpacity>
             </View>
-        )}
+        ))}
     }
     
 

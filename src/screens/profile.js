@@ -15,10 +15,10 @@ class Profile extends Component {
         
       return (
         <View style={styles.container}>
-          <Text style={styles.welcome}> {auth.currentUser.email}</Text> 
-          <Text style={styles.element}> Email: {this.props.user.email}</Text>
-          {/*<Text styles={styles.element}> Usuario creado el: {this.props.user.metadata.creationTime}</Text>
-          <Text style={styles.elemt}> Ultimo login: {this.props.user.metadata.lastSingInTime}</Text>*/}
+         
+          <Text style={styles.element}> Email: {auth.currentUser.email}</Text>
+         <Text styles={styles.element}> Usuario creado el: {auth.currentUser.metadata.creationTime}</Text>
+          <Text style={styles.elemt}> Ultimo login: {auth.currentUser.metadata.lastSignInTime}</Text>
           
               
           <TouchableOpacity style={styles.button} onPress={() => this.props.logout()}>
