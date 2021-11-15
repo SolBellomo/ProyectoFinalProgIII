@@ -46,25 +46,18 @@ class Menu extends Component {
         
     
    
-    register(email, password) {
-        auth.createUserWithEmailAndPassword(email, password)
-          .then((response) => {
-              console.log(response);
-              console.log('logged');
-              this.setState({
-                  logged: true,
-                  user: response.user
-              })
-          })
-                                    
-          .catch((err) => {
-            console.log(err);
-            this.setState({
-                errorMessage: error.message,
-                errorCode: error.code,
+    register(email, userName, pass) {
+        auth.createUserWithEmailAndPassword(email, pass)
+            .then( res => {
+                res.user.updateProfile({
+                    displayName: username
+                })
             })
-        })
-    }
+            .then(() => console.log('Usuario registrado exitosamente!'))
+            .catch(err => {
+                this.setState({registerError: err})
+            })
+    } 
 
     login(email, password) {
         auth
@@ -99,27 +92,7 @@ class Menu extends Component {
 
     render() {
         return (
-            /*
-            <>
-                {this.state.logged ? (
-                <Drawer.Navigator>
-                    <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
-                    <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass)=>this.register(email,pass)} />} />
 
-                </Drawer.Navigator>
-                
-                ) : ( 
-                <Drawer.Navigator>
-                    <Drawer.Screen options={{title: 'Home'}} name="Home" component={()=><Home user={this.state.user}/>} />
-                    
-                    <Drawer.Screen name="Nuevo Post" component={(screenProps) => <NewPostForm screenProps={screenProps}/> } />
-
-                    <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
-                </Drawer.Navigator>
-                )}
-                
-            </>
-            */
             <>
                 {this.state.logged ? (
                 <Drawer.Navigator>
@@ -131,8 +104,7 @@ class Menu extends Component {
                 ) : ( 
                 <Drawer.Navigator>
                     <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
-                    <Drawer.Screen name="Nuevo Post" component={(screenProps) => <NewPostForm screenProps={screenProps}/> } />
-                    <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass)=>this.register(email,pass)} />} />
+                    <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass,username)=>this.register(email,pass,username)} />} />
                 </Drawer.Navigator>
                 )
             }
