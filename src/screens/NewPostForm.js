@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
-import { auth, db } from "../firebase/config";
-import MyCamera from "../screens/MyCamera";
+import { auth, db } from '../firebase/config';
+
+import MyCamera from '../screens/MyCamera';
+
+
 
 class NewPostForm extends Component {
     constructor(props) {
@@ -22,7 +25,7 @@ class NewPostForm extends Component {
             description: this.state.description,
             likes: [],
             comments: [],
-            /* photo: this.state.url, */
+            photo: this.state.url,
         })
         .then( ()=>{
             this.setState({
@@ -30,17 +33,17 @@ class NewPostForm extends Component {
                 description:''
             })
             // redirect
-            /* this.props.drawerProps.navigation.navigate('Home') */
+            this.props.drawerProps.navigation.navigate('Home') 
         })
         .catch()
     }
 
-    /* onImageUpload(url) {
+    onImageUpload(url) {
         this.setState({
             url: url, 
             showCamera: false,
         })
-    } */
+    } 
 
     render(){
         return(

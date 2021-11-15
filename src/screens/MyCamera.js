@@ -1,4 +1,4 @@
-import Camera from "expo-camera";
+import { Camera } from "expo-camera";
 import React, { Component } from 'react';
 import { Text, View, TouchableOpacity, Image } from 'react-native';
 import {storage} from '../firebase/config'
@@ -100,7 +100,8 @@ class MyCamera extends Component {
                 ) : 
                 <>
                 < Camera
-                    style={{flex:1, width:"100%"}}
+
+                    style={{flex:1, width:"50%"}}
                     type={Camera.Constants.Type.front}
                     ref={(cam) => (this.camera = cam) } //acá enlazamos a esta cámara a la referencia de arriba que estaba vacía. Ahora nos vamos a poder referir a la cámara como "cam"
                 />
