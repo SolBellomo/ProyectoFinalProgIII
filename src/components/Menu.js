@@ -23,6 +23,28 @@ class Menu extends Component {
             errorCode: '',
         }
     }
+
+    componentDidMount(){
+        auth.onAuthStateChanged((user) => {
+            console.log(user);
+            if(user !== null){
+                this.setState({
+                    logged: true,
+                    
+                }) 
+            } else {
+                this.setState({
+                    logged: false, 
+                    
+                
+            })
+          }
+        })
+    }
+    
+    
+        
+    
    
     register(email, password) {
         auth.createUserWithEmailAndPassword(email, password)
@@ -102,6 +124,7 @@ class Menu extends Component {
                 {this.state.logged ? (
                 <Drawer.Navigator>
                     <Drawer.Screen options={{title: 'Home'}} name="Home" component={()=><Home user={this.state.user}/>} />
+                    <Drawer.Screen options={{title: 'Nuevo Post'}} name="Nuevo Post" component={()=> <NewPostForm/> }/>
                     <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
                 </Drawer.Navigator>
                 
@@ -110,7 +133,6 @@ class Menu extends Component {
                     <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
                     <Drawer.Screen name="Nuevo Post" component={(screenProps) => <NewPostForm screenProps={screenProps}/> } />
                     <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass)=>this.register(email,pass)} />} />
-                    <Drawer.Screen options={{title: 'Home' }} name="Home" component={()=><Profile  />}/>
                 </Drawer.Navigator>
                 )
             }

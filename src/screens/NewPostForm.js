@@ -14,7 +14,7 @@ class NewPostForm extends Component {
         }
     }
     
-    submitPost (){
+    submitPost(){
         db.collection('posts').add({
             owner: auth.currentUser.email,
             createdAt: Date.now(),            
@@ -22,24 +22,25 @@ class NewPostForm extends Component {
             description: this.state.description,
             likes: [],
             comments: [],
-            photo: this.state.url,
+            /* photo: this.state.url, */
         })
         .then( ()=>{
             this.setState({
                 title: '',
+                description:''
             })
             // redirect
-            this.props.drawerProps.navigation.navigate('Home')
+            /* this.props.drawerProps.navigation.navigate('Home') */
         })
         .catch()
     }
 
-    onImageUpload(url) {
+    /* onImageUpload(url) {
         this.setState({
             url: url, 
             showCamera: false,
         })
-    }
+    } */
 
     render(){
         return(
@@ -67,10 +68,10 @@ class NewPostForm extends Component {
                     </Text>    
                 </TouchableOpacity>
             </View>
-        ))
+        )}
     }
     
-}
+
 
 const styles = StyleSheet.create({
     formContainer:{
