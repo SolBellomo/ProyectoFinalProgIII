@@ -17,12 +17,12 @@ class Post extends Component {
  componentDidMount(){
      if(this.props.postData.data.likes){
          this.setState({
-             likes: this.props.postData.likes.legth,
-             myLike: this.props.postData.data.likes.inculdes(auth.currentUser.email),
+             likes: this.props.postData.data.likes.length,
+             myLike: this.props.postData.data.owner == auth.currentUser.email,
          })
     }else{
         this.setState({
-            likes: this.props.postData.data.likes.legth,
+            likes: this.props.postData.data.likes.length,
             myLike: false
         })
     }
@@ -49,7 +49,7 @@ class Post extends Component {
         })
         .then(()=>{
             this.setState({
-                likes: this.postData.data.likes.legth,
+                likes: this.postData.data.likes.length,
                 myLike: true
             })
         })
@@ -68,7 +68,7 @@ class Post extends Component {
         })
         .then(()=>{
             this.setState({
-                likes: this.postData.data.likes.legth,
+                likes: this.postData.data.likes.length,
                 myLike: false
             })
         })

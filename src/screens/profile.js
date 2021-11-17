@@ -11,13 +11,12 @@ class Profile extends Component {
     }
 
     render(){
-      {/*console.log(this.props.user.metadata);*/}
-        
+   
       return (
         <View style={styles.container}>
          
           <Text style={styles.element}> Email: {auth.currentUser.email}</Text>
-          <Text style={styles.elemt}> Nombre de usuario: {auth.currentUser.displayName}</Text>
+          <Text style={styles.elemt}> Nombre de usuario: {}</Text>
          <Text styles={styles.element}> Usuario creado el: {auth.currentUser.metadata.creationTime}</Text>
           <Text style={styles.elemt}> Ultimo login: {auth.currentUser.metadata.lastSignInTime}</Text>
           
