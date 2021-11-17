@@ -16,7 +16,7 @@ class Home extends Component {
     }
 
     showPost() {
-      db.collection('posteos').onSnapshot((docs) => {
+      db.collection('posts').onSnapshot((docs) => {
           let posteos = []
           docs.forEach((doc) => {
               posteos.push({
@@ -32,11 +32,14 @@ class Home extends Component {
 
     render(){
         return(
+            
           <View style={styles.container}>
             /*recorrer el array de post con flatlist*/
             <FlatList 
                 data={this.state.posts}
-                keyExtractor={(post) => post.id}            />
+                keyExtractor={(post) => post.id}            
+                renderItem = {({item})=> <Post postData={item}/>}
+                />
             </View>
         )            
     }
