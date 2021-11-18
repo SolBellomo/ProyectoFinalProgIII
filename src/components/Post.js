@@ -82,7 +82,14 @@ class Post extends Component {
         return(
              
            <View style={styles.container}>
-               {
+        
+              
+               <Text style={styles.user}> {this.props.postData.data.ownerNik}</Text>
+               <Image 
+                    style={{flex: 1, width:200, height:200}}
+                    source={{uri: this.props.postData.data.photo}}
+                />
+                       {
                    this.state.myLike == false ?
                    <TouchableOpacity onpress={()=>this.likePost()}>
                        <Text>Me gusta</Text>
@@ -95,18 +102,7 @@ class Post extends Component {
 
                }
                
-               <Text style={styles.likes}> likes: {this.state.likes}  </Text>
-               <Text style={styles.user}> {this.props.postData.data.owner}</Text>
-               <Text style={styles.user}> {this.props.postData.data.ownerNik}</Text>
-               {/* <Image 
-                            style={{flex: 1, width:'200', height:"200"}}
-                            source={{uri: "https://firebasestorage.googleapis.com/v0/b/pruebanative-25fb0.appspot.com/o/photos%2F1637241927193.jpg?alt=media&token=f2efe423-1cd8-43c8-9ed5-f52540c815b4"}}
-                        /> */}
-                        <Image 
-                    style={{flex: 1, width:200, height:200}}
-                    source={{uri: this.props.postData.data.photo}}
-                />
-                <Text style={styles.user}> {this.props.postData.data.photo}</Text>
+                 <Text style={styles.likes}> likes: {this.state.likes}  </Text>
            </View>
 
         )
