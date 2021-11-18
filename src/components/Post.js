@@ -81,16 +81,18 @@ class Post extends Component {
         console.log(this.props.postData) 
         return(
              
-           <View style={styles.container}>
+                 <View style={styles.container}>
         
               
-               <Text style={styles.user}> {this.props.postData.data.ownerNik}</Text>
-               <Image 
+                 <Text style={styles.user}> {this.props.postData.data.ownerNik}</Text>
+                 <Image 
                     style={{flex: 1, width:200, height:200}}
                     source={{uri: this.props.postData.data.photo}}
                 />
-                       {
-                   this.state.myLike == false ?
+                 <Text style={styles.title}> {this.props.postData.data.title}</Text>
+                 <Text style={styles.description}> {this.props.postData.data.description}</Text>
+                     
+                {this.state.myLike == false ?
                    <TouchableOpacity onpress={()=>this.likePost()}>
                        <Text>Me gusta</Text>
                        {/* <FontAwsomeIcon syle={style.icon} icon={farHeart}/> */}
@@ -98,9 +100,7 @@ class Post extends Component {
                    <TouchableOpacity onpress={()=>this.unLikePost()}>
                    {/* <FontAwsomeIcon syle={style.icon} icon={farHeart}/> */}
                    <Text>Me gusta</Text>
-               </TouchableOpacity>
-
-               }
+               </TouchableOpacity>}
                
                  <Text style={styles.likes}> likes: {this.state.likes}  </Text>
            </View>
@@ -111,6 +111,7 @@ class Post extends Component {
 const styles = StyleSheet.create({
     container:{
 
+        
     },
     Likes:{
 
