@@ -50,7 +50,7 @@ class Menu extends Component {
         auth.createUserWithEmailAndPassword(email, pass)
             .then( res => {
                 res.user.updateProfile({
-                    displayName: username
+                    displayName: userName
                 })
             })
             .then(() => console.log('Usuario registrado exitosamente!'))

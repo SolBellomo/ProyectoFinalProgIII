@@ -33,7 +33,7 @@ class NewPostForm extends Component {
                 description:''
             })
             // redirect
-            this.props.drawerProps.navigation.navigate('Home') 
+            this.props.drawerProps.navigation.showPost('Home') 
         })
         .catch()
     }
