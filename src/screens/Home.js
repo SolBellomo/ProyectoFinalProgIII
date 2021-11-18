@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {View, Text, StyleSheet, FlatList, ActivityIndicator, Image} from 'react-native';
+import { Text, View, TouchableOpacity, Image, FlatList, StyleSheet} from 'react-native';
+
 import { db } from '../firebase/config';
 import Post from '../components/Post'
 
@@ -34,7 +35,7 @@ class Home extends Component {
         return(
             
           <View style={styles.container}>
-            /*recorrer el array de post con flatlist*/
+            {/* recorrer el array de post con flatlist */}
             <FlatList 
                 data={this.state.posts}
                 keyExtractor={(post) => post.id}            

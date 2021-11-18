@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity} from 'react-native'
+
+import { Text, View, TouchableOpacity,  StyleSheet, Image} from 'react-native';
 import firebase from 'firebase'
 /* import { FontAwsomeIcon} from '@fontawsome/react-native-fontawsome'
 import {faHeart as farHeart} from '@fontawsome/free-regular-svg-icons'
 import {faHeart as farHeart} from '@fontawsome/free-regular-solid-svg-icons' */
 import { db, auth } from '../firebase/config'
+import { TouchableHighlight } from 'react-native-gesture-handler'
 
 class Post extends Component {
     constructor(props) {
@@ -92,8 +94,19 @@ class Post extends Component {
                </TouchableOpacity>
 
                }
-               <Text style={styles.likes}> <b>likes: {this.state.likes} </b> </Text>
-               <Text style={styles.user}> <b>{this.props.postData.data.owner}</b>{this.props.postData.data.textp}</Text>
+               
+               <Text style={styles.likes}> likes: {this.state.likes}  </Text>
+               <Text style={styles.user}> {this.props.postData.data.owner}</Text>
+               <Text style={styles.user}> {this.props.postData.data.ownerNik}</Text>
+               {/* <Image 
+                            style={{flex: 1, width:'200', height:"200"}}
+                            source={{uri: "https://firebasestorage.googleapis.com/v0/b/pruebanative-25fb0.appspot.com/o/photos%2F1637241927193.jpg?alt=media&token=f2efe423-1cd8-43c8-9ed5-f52540c815b4"}}
+                        /> */}
+                        <Image 
+                    style={{flex: 1, width:200, height:200}}
+                    source={{uri: this.props.postData.data.photo}}
+                />
+                <Text style={styles.user}> {this.props.postData.data.photo}</Text>
            </View>
 
         )

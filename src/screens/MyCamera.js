@@ -14,7 +14,7 @@ class MyCamera extends Component {
             errorMessage: '',
             errorCode: '',
         }
-        this.camera; //es una referencia a la cámara que en este momento está vacía
+        this.camera; 
     }
     
     componentDidMount(){
@@ -84,7 +84,7 @@ class MyCamera extends Component {
                 {this.state.photo ? (
                     <>
                         <Image 
-                            style={{width:'100'}}
+                            style={{flex: 1, width:'100%'}}
                             source={{uri: this.state.photo}}
                         />
                         <View>

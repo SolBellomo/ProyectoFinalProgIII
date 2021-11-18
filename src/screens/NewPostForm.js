@@ -20,6 +20,7 @@ class NewPostForm extends Component {
     submitPost(){
         db.collection('posts').add({
             owner: auth.currentUser.email,
+            ownerNik: auth.currentUser.displayName,
             createdAt: Date.now(),            
             title: this.state.title,
             description: this.state.description,
@@ -33,7 +34,7 @@ class NewPostForm extends Component {
                 description:''
             })
             // redirect
-            this.props.drawerProps.navigation.showPost('Home') 
+            this.props.drawerProps.navigation.navigate('Home') 
         })
         .catch()
     }
