@@ -74,9 +74,6 @@ class MyCamera extends Component {
             })
     }
 
-    clearPicture(){
-
-    }
 
     render () {
         return (

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
 import { Text, View, TouchableOpacity,  StyleSheet, Image, ActivityIndicator} from 'react-native';
-import firebase from 'firebase'
-/* import { FontAwsomeIcon} from '@fontawsome/react-native-fontawsome'
-import {faHeart as farHeart} from '@fontawsome/free-regular-svg-icons'
-import {faHeart as farHeart} from '@fontawsome/free-regular-solid-svg-icons' */
-import { db, auth } from '../firebase/config'
-import { TouchableHighlight } from 'react-native-gesture-handler'
+import firebase from 'firebase';
+import { db, auth } from '../firebase/config';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {} from '@fortawesome/free-brands-svg-icons';
+import { faHeart, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 class Post extends Component {
     constructor(props) {
@@ -47,12 +48,12 @@ class Post extends Component {
     likePosts(){
         /* let post = db.collection("posteos").doc(this.props.postData.id) */
         db.collection('posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FioldValue.arrayUnion(auth.currentUser.email)
+            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
         .then(()=>{
             this.setState({
                 likes: this.postData.data.likes.length,
-                myLike: true
+                myLike: true,
             })
         })
     }
@@ -62,7 +63,7 @@ class Post extends Component {
 
         post.update() */
         db.collection('posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FioldValue.arrayUnion(auth.currentUser.email)
+            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
         })
         .then(()=>{
             this.setState({
@@ -84,26 +85,34 @@ class Post extends Component {
         return(
              
                 <View style={styles.container}>
-                    <ActivityIndicator size='large' color='purple' />
-                    <Text style={styles.user}> {this.props.postData.data.ownerNik}</Text>
+
+                    <ActivityIndicator size='small' color='purple' />
+                    
+                    <Text><FontAwesomeIcon icon={faUserCircle} /> {this.props.postData.data.ownerNik}</Text>
+                    
                     <Image 
                         style={{flex: 1, width:200, height:200}}
                         source={{uri: this.props.postData.data.photo}}
                     />
+
                     <Text style={styles.title}> {this.props.postData.data.title}</Text>
                     <Text style={styles.description}> {this.props.postData.data.description}</Text>
                      
                     {this.state.myLike == false ?
                     <TouchableOpacity onpress={()=>this.likePost()}>
-                       <Text>Me gusta</Text>
-                       {/* <FontAwsomeIcon syle={style.icon} icon={farHeart}/> */}
+                       <Text style={{color:'red',}}><FontAwesomeIcon icon={faHeart}/></Text>
+                       <Text style={styles.likes}>{this.state.likes} </Text>
+                       
                     </TouchableOpacity>:
                     <TouchableOpacity onpress={()=>this.unLikePost()}>
-                    {/* <FontAwsomeIcon syle={style.icon} icon={farHeart}/> */}
-                        <Text>Me gusta</Text>
-                    </TouchableOpacity>}
-                    <Text style={styles.likes}> likes: {this.state.likes}  </Text>
+                    
+                        <Text style={{color:'black',}}><FontAwesomeIcon icon={faHeart}/></Text>
+                        <Text style={styles.likes}>{this.state.likes} </Text>
 
+                    </TouchableOpacity>}
+                    
+                    
+                    
 
                     <TouchableOpacity style={styles.button} onPress={()=>this.deletePost()}>
                         <Text style={styles.textButton}>
@@ -119,15 +128,18 @@ class Post extends Component {
 const styles = StyleSheet.create({
     container:{
         alignItems: 'center',
-        borderBottomColor: 'black',
-        borderBottomWidth: 1, 
-        paddingBottom: 10,
+        borderColor: '#DCDCDC',
+        borderWidth: 2,
+        borderStyle: 'solid',
+        padding: 50,
         flex: 2,
         display: 'flex',
+        marginBottom: 10,
+        borderRadius: 12,
     },
 
-    Likes:{
-
+    title: {
+        fontWeight: 500,
     },
 
     button: {

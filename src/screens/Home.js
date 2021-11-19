@@ -49,9 +49,10 @@ const styles = StyleSheet.create({
     container: {
         textAlign: 'center',
         padding: 10,
+        backgroundColor: 'white',
     },
     image:{
-        height:250,
+        height: 250,
     },
     flatList:{
         justifyContent:'space-between'
