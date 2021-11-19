@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Text, View, TouchableOpacity,  StyleSheet, Image} from 'react-native';
+import { Text, View, TouchableOpacity,  StyleSheet, Image, ActivityIndicator} from 'react-native';
 import firebase from 'firebase'
 /* import { FontAwsomeIcon} from '@fontawsome/react-native-fontawsome'
 import {faHeart as farHeart} from '@fontawsome/free-regular-svg-icons'
@@ -84,7 +84,7 @@ class Post extends Component {
         return(
              
                 <View style={styles.container}>
-                    
+                    <ActivityIndicator size='large' color='purple' />
                     <Text style={styles.user}> {this.props.postData.data.ownerNik}</Text>
                     <Image 
                         style={{flex: 1, width:200, height:200}}
@@ -122,6 +122,8 @@ const styles = StyleSheet.create({
         borderBottomColor: 'black',
         borderBottomWidth: 1, 
         paddingBottom: 10,
+        flex: 2,
+        display: 'flex',
     },
 
     Likes:{
