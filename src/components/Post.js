@@ -86,12 +86,12 @@ class Post extends Component {
              
                 <View style={styles.container}>
 
-                    <ActivityIndicator size='small' color='purple' />
                     
-                    <Text><FontAwesomeIcon icon={faUserCircle} /> {this.props.postData.data.ownerNik}</Text>
+                    
+                    <Text style={styles.user} ><FontAwesomeIcon icon={faUserCircle} /> {this.props.postData.data.ownerNik}</Text>
                     
                     <Image 
-                        style={{flex: 1, width:200, height:200}}
+                        style={{flex: 1, width: 300, height:250}}
                         source={{uri: this.props.postData.data.photo}}
                     />
 
@@ -99,12 +99,12 @@ class Post extends Component {
                     <Text style={styles.description}> {this.props.postData.data.description}</Text>
                      
                     {this.state.myLike == false ?
-                    <TouchableOpacity onpress={()=>this.likePost()}>
+                    <TouchableOpacity style={styles.likeButton} onpress={()=>this.likePost()}>
                        <Text style={{color:'red',}}><FontAwesomeIcon icon={faHeart}/></Text>
                        <Text style={styles.likes}>{this.state.likes} </Text>
                        
                     </TouchableOpacity>:
-                    <TouchableOpacity onpress={()=>this.unLikePost()}>
+                    <TouchableOpacity style={styles.likeButton} onpress={()=>this.unLikePost()}>
                     
                         <Text style={{color:'black',}}><FontAwesomeIcon icon={faHeart}/></Text>
                         <Text style={styles.likes}>{this.state.likes} </Text>
@@ -140,22 +140,36 @@ const styles = StyleSheet.create({
 
     title: {
         fontWeight: 500,
+        marginTop: 10,
     },
 
     button: {
-        backgroundColor:'#FF7153',
-        borderColor: 'green',
+        backgroundColor:'#405DE6',
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: 'center',
         borderRadius:4, 
         borderWidth:1,
         borderStyle: 'solid',
-        borderColor: '#CF2400',
+        borderColor: '#fff',
+        marginTop: 10,
     },
 
     textButton: {
         color: '#fff',
+    },
+
+    likeButton: {
+          flex: 1,
+          marginTop: 10,
+         flexWrap: "wrap",
+        
+    },
+
+    user: {
+        marginBottom: 8,
+        alignSelf: "flex-start",
+        
     },
 
 })
