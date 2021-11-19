@@ -36,7 +36,7 @@ class NewPostForm extends Component {
             // redirect
             this.props.drawerProps.navigation.navigate('Home') 
         })
-        .catch()
+        .catch() //hacer bien el catch
     }
 
     onImageUpload(url) {
