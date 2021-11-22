@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Text, View, TouchableOpacity,  StyleSheet, Image, ActivityIndicator} from 'react-native';
+import { Text, View, TouchableOpacity,  StyleSheet, Image, ActivityIndicator, Modal} from 'react-native';
 import firebase from 'firebase';
 import { db, auth } from '../firebase/config';
 import CommentForm from '../components/CommentForm';
@@ -102,7 +102,13 @@ class Post extends Component {
                         Borrar post
                         </Text>    
                     </TouchableOpacity>
+                    <Modal visible={false} animationType="slide" transparent={false}>
+                        
                     <CommentForm postId={this.props.postData.id} />
+                        
+                     </Modal>
+                   
+                    
 
                 </View>
 

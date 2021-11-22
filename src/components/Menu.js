@@ -37,6 +37,7 @@ class Menu extends Component {
             } else {
                 this.setState({
                     logged: false, 
+                    cargando: false,
             })
           }
         })
