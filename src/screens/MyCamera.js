@@ -101,12 +101,12 @@ class MyCamera extends Component {
                 <>
                 < Camera
 
-                    style={{flex:1, width:"50%"}}
+                    style={{flex:1, width:"100%"}}
                     type={Camera.Constants.Type.front}
                     ref={(cam) => (this.camera = cam) } //acá enlazamos a esta cámara a la referencia de arriba que estaba vacía. Ahora nos vamos a poder referir a la cámara como "cam"
                 />
                 <TouchableOpacity onPress={() => this.takePicture()} style={styles.button}>
-                    <Text> Shoot </Text>
+                    <Text style={styles.textButton}> Shoot </Text>
                 </TouchableOpacity>
                 </>
                 }                
@@ -119,15 +119,14 @@ const styles = StyleSheet.create({
 
     camera: {
         flex: 1, 
-        width: 200,
-        borderColor: 'red',
-        borderWidth: 5,
-        borderStyle: 'solid',
+        width: "100%",
+       
     },
 
     button: {
         backgroundColor: "#405DE6",
         marginHorizontal: 10,
+        alignSelf: "center",
         paddingHorizontal: 10,
         paddingVertical: 6,
         textAlign: "center",
@@ -138,6 +137,10 @@ const styles = StyleSheet.create({
         width: 300,
         marginTop: 20,
     },
+
+    textButton: {
+        color: "#fff",
+      },
 
 });
 

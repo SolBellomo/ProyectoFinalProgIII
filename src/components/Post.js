@@ -40,8 +40,9 @@ class Post extends Component {
         })
         .then(()=>{
             this.setState({
-                likes: this.props.postData.data.likes.length,
                 myLike: true,
+                likes: this.props.postData.data.likes.length,
+                
             })
         })
     }
@@ -53,8 +54,9 @@ class Post extends Component {
         })
         .then(()=>{
             this.setState({
+                myLike: false,
                 likes: this.props.postData.data.likes.length,
-                myLike: false
+                
             })
         })
     }
@@ -86,13 +88,13 @@ class Post extends Component {
                     {!this.state.myLike ?
 
                     <TouchableOpacity style={styles.likeButton} onPress={()=>this.likePosts()}>
-                       <Text style={{color:'black',}}><FontAwesomeIcon icon={faHeart}/></Text>
+                       <Text style={{color:'red',}}><FontAwesomeIcon icon={faHeart}/></Text>
                        <Text style={styles.likes}>{this.state.likes} </Text>
                     
                     </TouchableOpacity>:
                     <TouchableOpacity style={styles.likeButton} onPress={()=>this.unlikePosts()}>
                     
-                        <Text style={{color:'red',}}><FontAwesomeIcon icon={faHeart}/></Text>
+                        <Text style={{color:'black',}}><FontAwesomeIcon icon={faHeart}/></Text>
                         <Text style={styles.likes}>{this.state.likes} </Text>
 
                     </TouchableOpacity>}

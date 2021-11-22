@@ -32,12 +32,23 @@ class Profile extends Component {
     }
 
     const styles= StyleSheet.create({
-      button:{
-        backgroundColor: "#fff",
+      button: {
+        backgroundColor: "#405DE6",
+        marginHorizontal: 100,
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "#fff",
+        width: 200,
+        marginTop: 20,
       },
-      container:{
-
-      }
+    
+      textButton: {
+        color: "#fff",
+      },
     })
   
     export default Profile;
