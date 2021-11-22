@@ -82,9 +82,10 @@ const styles = StyleSheet.create({
         paddingHorizontal:10,
         marginTop: 20,
     },
+
     input:{
-        height:100,
-        paddingVertical:15,
+        height: 100,
+        paddingVertical: 15,
         paddingHorizontal: 10,
         borderWidth:1,
         borderColor: '#ccc',
@@ -92,6 +93,7 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         marginVertical:10,
     },
+
     button:{
         backgroundColor:'#28a745',
         paddingHorizontal: 10,
@@ -102,10 +104,10 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         borderColor: '#28a745'
     },
+
     textButton:{
         color: '#fff'
     }
-
 })
 
 

@@ -51,18 +51,22 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: 'white',
     },
+
     image:{
         height: 250,
     },
+
     flatList:{
         justifyContent:'space-between'
     },
+
     touchable:{
         padding: 4,
         backgroundColor: '#ccc',
         marginBottom: 10,
         borderRadius: 4,
     },
+    
     touchableText:{
         fontWeight: 'bold'
     }

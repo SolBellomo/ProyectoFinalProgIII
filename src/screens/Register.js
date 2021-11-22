@@ -45,7 +45,7 @@ class Register extends Component {
 }
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: "#405DE6",
+    backgroundColor: "white",
     marginHorizontal: 10,
     paddingHorizontal: 10,
     paddingVertical: 6,

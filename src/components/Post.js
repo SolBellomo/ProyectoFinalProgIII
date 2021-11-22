@@ -71,7 +71,6 @@ class Post extends Component {
                 myLike: false
             })
         })
-    
     }
 
     deletePost(){
@@ -125,6 +124,7 @@ class Post extends Component {
         )
     }
 }
+
 const styles = StyleSheet.create({
     container:{
         alignItems: 'center',
