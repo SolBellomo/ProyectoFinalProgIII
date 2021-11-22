@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: "#fff",
-    width: 300,
+    width: '90%',
     marginTop: 20,
   },
 
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     borderColor: 'grey',
     borderStyle: 'solid',
     borderWidth: 1,
-    width: 300,
+    width: '90%',
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 4,

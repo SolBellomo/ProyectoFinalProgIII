@@ -3,10 +3,12 @@ import React, { Component } from 'react'
 import { Text, View, TouchableOpacity,  StyleSheet, Image, ActivityIndicator} from 'react-native';
 import firebase from 'firebase';
 import { db, auth } from '../firebase/config';
+import CommentForm from '../components/CommentForm';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {} from '@fortawesome/free-brands-svg-icons';
 import { faHeart, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 
 class Post extends Component {
@@ -30,20 +32,6 @@ class Post extends Component {
         })
     }
  }
-    /* receiveLikes() {
-        let likes = this.props.postData.data.Likes;
-            if(likes){
-                this.setState({
-                    likes: Likes.Length,
-            })
-        }
-        if(Likes.includes(auth.currentUser.email)){
-            this.setState({
-                liked:true
-            })
-        }
-    }
- */    /*  */
 
     likePosts(){
         /* let post = db.collection("posteos").doc(this.props.postData.id) */
@@ -52,22 +40,20 @@ class Post extends Component {
         })
         .then(()=>{
             this.setState({
-                likes: this.postData.data.likes.length,
+                likes: this.props.postData.data.likes.length,
                 myLike: true,
             })
         })
     }
 
     unlikePosts(){
-        /* let post = db.collection("posteos").doc(this.props.postData.id);
 
-        post.update() */
         db.collection('posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
+            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
         .then(()=>{
             this.setState({
-                likes: this.postData.data.likes.length,
+                likes: this.props.postData.data.likes.length,
                 myLike: false
             })
         })
@@ -78,6 +64,7 @@ class Post extends Component {
             console.log("Document successfully deleted!");
         })
     }
+
 
     render(){
         console.log(this.props.postData) 
@@ -96,27 +83,26 @@ class Post extends Component {
                     <Text style={styles.title}> {this.props.postData.data.title}</Text>
                     <Text style={styles.description}> {this.props.postData.data.description}</Text>
                      
-                    {this.state.myLike == false ?
-                    <TouchableOpacity style={styles.likeButton} onpress={()=>this.likePost()}>
-                       <Text style={{color:'red',}}><FontAwesomeIcon icon={faHeart}/></Text>
+                    {!this.state.myLike ?
+
+                    <TouchableOpacity style={styles.likeButton} onPress={()=>this.likePosts()}>
+                       <Text style={{color:'black',}}><FontAwesomeIcon icon={faHeart}/></Text>
                        <Text style={styles.likes}>{this.state.likes} </Text>
-                       
-                    </TouchableOpacity>:
-                    <TouchableOpacity style={styles.likeButton} onpress={()=>this.unLikePost()}>
                     
-                        <Text style={{color:'black',}}><FontAwesomeIcon icon={faHeart}/></Text>
+                    </TouchableOpacity>:
+                    <TouchableOpacity style={styles.likeButton} onPress={()=>this.unlikePosts()}>
+                    
+                        <Text style={{color:'red',}}><FontAwesomeIcon icon={faHeart}/></Text>
                         <Text style={styles.likes}>{this.state.likes} </Text>
 
                     </TouchableOpacity>}
-                    
-                    
-                    
 
                     <TouchableOpacity style={styles.button} onPress={()=>this.deletePost()}>
                         <Text style={styles.textButton}>
                         Borrar post
                         </Text>    
                     </TouchableOpacity>
+                    <CommentForm postId={this.props.postData.id} />
 
                 </View>
 

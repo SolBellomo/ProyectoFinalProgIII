@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, StyleSheet } from 'react-native';
+import {View, StyleSheet, ActivityIndicator } from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { auth, db } from "../firebase/config";
 
@@ -22,6 +22,7 @@ class Menu extends Component {
             user: '',
             errorMessage: '',
             errorCode: '',
+            cargando: true, 
         }
     }
 
@@ -31,13 +32,11 @@ class Menu extends Component {
             if(user !== null){
                 this.setState({
                     logged: true,
-                    
+                    cargando: false, 
                 }) 
             } else {
                 this.setState({
                     logged: false, 
-                    
-                
             })
           }
         })
@@ -92,20 +91,26 @@ class Menu extends Component {
         return (
 
             <>
-                {this.state.logged ? (
-                <Drawer.Navigator>
-                    <Drawer.Screen options={{title: 'Home'}} name="Home" component={()=><Home user={this.state.user}/>} /> 
-                    <Drawer.Screen options={{title: 'Nuevo Post'}} name="Nuevo Post" component={()=> <NewPostForm/> }/>
-                    <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
-                </Drawer.Navigator>
-                
-                ) : ( 
-                <Drawer.Navigator>
-                    <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
-                    <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass,username)=>this.register(email,pass,username)} />} />
-                    <Drawer.Screen options={{title: 'Recuperar Contraseña'}} name='PasswordRecovery' component={() => <PasswordRecovery recuperarContraseña={(email, pass) => this.PasswordRecovery(email, pass)} /> } />
-                </Drawer.Navigator>
-                )
+                {
+                    this.state.cargando ?
+                        <ActivityIndicator size='large' color='blue'/>
+                    
+                     : (
+                        this.state.logged ? (
+                            <Drawer.Navigator>
+                                <Drawer.Screen options={{title: 'Home'}} name="Home" component={()=><Home user={this.state.user}/>} /> 
+                                <Drawer.Screen options={{title: 'Nuevo Post'}} name="Nuevo Post" component={()=> <NewPostForm/> }/>
+                                <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
+                            </Drawer.Navigator>
+                            
+                            ) : ( 
+                            <Drawer.Navigator>
+                                <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
+                                <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass,username)=>this.register(email,pass,username)} />} />
+                                <Drawer.Screen options={{title: 'Recuperar Contraseña'}} name='PasswordRecovery' component={() => <PasswordRecovery recuperarContraseña={(email, pass) => this.PasswordRecovery(email, pass)} /> } />
+                            </Drawer.Navigator>
+                            )
+                     )
             }
             </>
         )}

@@ -1,6 +1,6 @@
 import { Camera } from "expo-camera";
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import { Text, View, TouchableOpacity, Image, StyleSheet } from 'react-native';
 import {storage} from '../firebase/config'
 
 class MyCamera extends Component {
@@ -80,10 +80,13 @@ class MyCamera extends Component {
             <>
                 {this.state.photo ? (
                     <>
-                        <Image 
-                            style={{flex: 1, width:'100%'}}
-                            source={{uri: this.state.photo}}
-                        />
+                        <View style={styles.camera}>
+                            <Image 
+                                style={styles.camera}
+                                source={{uri: this.state.photo}}
+                            />
+                        </View>
+                        
                         <View>
                             <TouchableOpacity onPress={() => this.savePicture() }>
                                 <Text> Aceptar
@@ -102,7 +105,7 @@ class MyCamera extends Component {
                     type={Camera.Constants.Type.front}
                     ref={(cam) => (this.camera = cam) } //acá enlazamos a esta cámara a la referencia de arriba que estaba vacía. Ahora nos vamos a poder referir a la cámara como "cam"
                 />
-                <TouchableOpacity onPress={() => this.takePicture()}>
+                <TouchableOpacity onPress={() => this.takePicture()} style={styles.button}>
                     <Text> Shoot </Text>
                 </TouchableOpacity>
                 </>
@@ -111,5 +114,32 @@ class MyCamera extends Component {
             );            
     }
 }
+
+const styles = StyleSheet.create({
+
+    camera: {
+        flex: 1, 
+        width: 200,
+        borderColor: 'red',
+        borderWidth: 5,
+        borderStyle: 'solid',
+    },
+
+    button: {
+        backgroundColor: "#405DE6",
+        marginHorizontal: 10,
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        textAlign: "center",
+        borderRadius: 4,
+        borderWidth: 1,
+        borderStyle: "solid",
+        borderColor: "#fff",
+        width: 300,
+        marginTop: 20,
+    },
+
+});
+
 
 export default MyCamera;
