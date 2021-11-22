@@ -84,8 +84,7 @@ class Post extends Component {
         return(
              
                 <View style={styles.container}>
-
-                    
+                 
                     
                     <Text style={styles.user} ><FontAwesomeIcon icon={faUserCircle} /> {this.props.postData.data.ownerNik}</Text>
                     

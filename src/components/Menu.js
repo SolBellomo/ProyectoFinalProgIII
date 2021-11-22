@@ -8,6 +8,7 @@ import Login from '../screens/login';
 import Register from '../screens/register';
 import Profile from '../screens/profile';
 import NewPostForm from '../screens/NewPostForm';
+import PasswordRecovery from '../screens/PasswordRecovery'
 
 
 const Drawer = createDrawerNavigator();
@@ -42,10 +43,7 @@ class Menu extends Component {
         })
     }
     
-    
-        
-    
-   
+
     register(email, userName, pass) {
         auth.createUserWithEmailAndPassword(email, pass)
             .then( res => {
@@ -105,6 +103,7 @@ class Menu extends Component {
                 <Drawer.Navigator>
                     <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
                     <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass,username)=>this.register(email,pass,username)} />} />
+                    <Drawer.Screen options={{title: 'Recuperar Contraseña'}} name='PasswordRecovery' component={() => <PasswordRecovery recuperarContraseña={(email, pass) => this.PasswordRecovery(email, pass)} /> } />
                 </Drawer.Navigator>
                 )
             }
