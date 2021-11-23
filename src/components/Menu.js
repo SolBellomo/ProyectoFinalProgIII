@@ -102,6 +102,7 @@ class Menu extends Component {
                                 <Drawer.Screen options={{title: 'Home'}} name="Home" component={()=><Home user={this.state.user}/>} /> 
                                 <Drawer.Screen options={{title: 'Nuevo Post'}} name="Nuevo Post" component={(screenProps)=> <NewPostForm screenProps={screenProps}/> }/>
                                 <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
+                                
                             </Drawer.Navigator>
 
                             ) : ( 
