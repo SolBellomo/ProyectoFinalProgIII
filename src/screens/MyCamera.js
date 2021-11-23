@@ -104,7 +104,7 @@ class MyCamera extends Component {
                 <>
                 < Camera
 
-                    style={style.camera}
+                    style={styles.camera}
                     type={Camera.Constants.Type.front}
                     ref={(cam) => (this.camera = cam) } //acá enlazamos a esta cámara a la referencia de arriba que estaba vacía. Ahora nos vamos a poder referir a la cámara como "cam"
                 />

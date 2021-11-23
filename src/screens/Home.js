@@ -8,7 +8,8 @@ class Home extends Component {
     constructor() {
       super();
       this.state = {   
-        posts: []
+        posts: [],
+        comments: [],
       }
     }
 
@@ -40,6 +41,11 @@ class Home extends Component {
                 keyExtractor={(post) => post.id}            
                 renderItem = {({item})=> <Post postData={item}/>}
             />
+            <FlatList 
+                data={this.state.comments}
+                keyExtractor={(com) => com.id}            
+                renderItem = {({item})=> <CommentForm postId={item}/>}
+            />
             </View>
         )            
     }
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 4,
     },
-    
+
     touchableText:{
         fontWeight: 'bold'
     }

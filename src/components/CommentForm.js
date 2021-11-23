@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Text, View, TextInput, TouchableOpacity, StyleSheet, Image } from "react-native";
+import {Text, View, TextInput, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
 import firebase from 'firebase';
 import { db, auth } from '../firebase/config';
 
@@ -53,7 +53,7 @@ class CommentForm extends Component {
             <TouchableOpacity
               style={styles.button}
               onPress={() => this.onComment()} //ejecuta la función onComment
-            _>
+            >
               <Text style={styles.textButton}>Comentar</Text>
             </TouchableOpacity>   
 

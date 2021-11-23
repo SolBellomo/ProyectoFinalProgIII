@@ -10,7 +10,6 @@ import {} from '@fortawesome/free-brands-svg-icons';
 import { faHeart, faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 
-
 class Post extends Component {
     constructor(props) {
         super(props)
@@ -153,16 +152,14 @@ const styles = StyleSheet.create({
     },
 
     likeButton: {
-          flex: 1,
-          marginTop: 10,
-         flexWrap: "wrap",
-        
+        flex: 1,
+        marginTop: 10,
+        flexWrap: "wrap",
     },
 
     user: {
         marginBottom: 8,
         alignSelf: "flex-start",
-        
     },
 
 })
