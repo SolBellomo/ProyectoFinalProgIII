@@ -18,6 +18,7 @@ class Search extends Component{
     componentDidMount(){
        
     }
+    
     search(text){
         db.collection('posts').where('username','==', text).get().then(docs => {
             let posts=[];
