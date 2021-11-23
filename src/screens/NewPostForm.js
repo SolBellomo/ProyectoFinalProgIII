@@ -34,7 +34,7 @@ class NewPostForm extends Component {
                 description:''
             })
             // redirect
-            this.props.drawerProps.navigation.navigate('Home') 
+            this.props.screenProps.navigation.navigate('Home') 
         })
         .catch() //hacer bien el catch
     }
@@ -45,6 +45,7 @@ class NewPostForm extends Component {
             showCamera: false,
         })
     } 
+
 
     render(){
         return(
@@ -66,7 +67,7 @@ class NewPostForm extends Component {
                     multiline={true}
                     value={this.state.description}    
                 />
-                <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()}>
+                <TouchableOpacity style={styles.button} onPress={()=>this.submitPost()} >
                     <Text style={styles.textButton}>
                         Postear
                     </Text>    
