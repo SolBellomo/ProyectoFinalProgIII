@@ -104,7 +104,7 @@ class MyCamera extends Component {
                 <>
                 < Camera
 
-                    style={{flex:1, width:"100%"}}
+                    style={style.camera}
                     type={Camera.Constants.Type.front}
                     ref={(cam) => (this.camera = cam) } //acá enlazamos a esta cámara a la referencia de arriba que estaba vacía. Ahora nos vamos a poder referir a la cámara como "cam"
                 />
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     camera: {
         flex: 1, 
         width: "100%",
-       
     },
 
     button: {
