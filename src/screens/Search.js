@@ -1,7 +1,8 @@
-import React, {Component} from "react";
-import {View, Text, ActivityIndicator} from 'react-native';
 
-import { db } from "../Firebase/Config";
+import React, {Component} from "react";
+import {View, Text, ActivityIndicator, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+
+import {db} from '../firebase/config';
 
 import Post from "../Components/Post";
 
@@ -40,38 +41,99 @@ class Search extends Component{
 
     render(){
         return(
-            <View style= {styles.container}>
-                
-                  <Text style={styles.titulo}> Buscador </Text>
-                  <TextInput
-                style = {styles.buscador}
-                placeholder = "Buscar usuario"
-                onChangeText  = { (text) => this.search(text)} 
+          
+            <View style={styles.inicioSesion}>
+
+          
+    
+            <View style={styles.campos}>
+                <TextInput style={styles.input}
+                  onChangeText={(text) => this.setState({ email: text })}
+                  placeholder= "Insertar Usuario"
+                  keyboardType="email-address" 
                 />
-
-                {
-                    this.state.loading ? (
-                        <ActivityIndicator color={"gray"} size={"small"} />
-                    ) : (
-                    <FlatList
-                        style ={styles.flat}
-                        data={this.state.posts}
-                        keyExtractor={(item)=> item.id.toString()}
-                        renderItem={({item})=> <Post info={item} />}
-                    />
-                    )
-                }
-                {
-                    this.state.loading == false && this.state.posts.length == 0 && this.state.input.length > 0  ?
-                    <Text> No se encontró al usuario o no tiene publicaciones. </Text> :
-                    null
-
-                }
+              
+                <TouchableOpacity
+                  style={styles.button}
+                 
+                >
+                  <Text style={styles.textButton}>Buscar</Text>
+                </TouchableOpacity>   
+                
             </View>
-        )
+            
+          </View>
+        
+                  
+          )
     }
 }
 
+const styles = StyleSheet.create({
+    inicioSesion: {
+      borderColor: 'grey',
+      borderStyle: 'solid',
+      borderWidth: 1,
+      marginLeft: 50,
+      marginTop: 30,
+      marginRight: 50,
+      borderRadius: 20,
+      minHeight: 'auto',
+      backgroundColor: 'white',
+    },
+  
+    campos: {
+      alignItems: "center", 
+      marginBottom: 50,
+      padding: 10,
+    },
+  
+    image:{
+      height: 300,
+      marginTop: 40,
+    },
+  
+    button: {
+      backgroundColor: "#405DE6",
+      marginHorizontal: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      textAlign: "center",
+      borderRadius: 4,
+      borderWidth: 1,
+      borderStyle: "solid",
+      borderColor: "#fff",
+      width: '90%',
+      marginTop: 20,
+    },
+  
+    textButton: {
+      color: "#fff",
+    },
+  
+    input: {
+      marginTop: 5,
+      marginBottom: 5,
+      borderColor: 'grey',
+      borderStyle: 'solid',
+      borderWidth: 1,
+      width: '90%',
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      borderRadius: 4,
+    },
+  
+    regis:{
+      marginHorizontal: 10,
+      marginTop: 5,
+      marginBottom: 5,
+    },
+  
+    registro: {
+      color: "#405DE6",
+    },
+  
+  });
 
 
 export default Search;
