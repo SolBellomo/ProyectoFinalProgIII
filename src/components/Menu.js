@@ -8,7 +8,8 @@ import Login from '../screens/login';
 import Register from '../screens/register';
 import Profile from '../screens/profile';
 import NewPostForm from '../screens/NewPostForm';
-import PasswordRecovery from '../screens/PasswordRecovery'
+import PasswordRecovery from '../screens/PasswordRecovery';
+import Search from '../screens/Search'
 
 
 const Drawer = createDrawerNavigator();
@@ -102,6 +103,8 @@ class Menu extends Component {
                                 <Drawer.Screen options={{title: 'Home' }} name="Home" component={()=><Home user={this.state.user}/>} /> 
                                 <Drawer.Screen options={{title: 'Nuevo Post'}} name="NewPostForm" component={(screenProps)=> <NewPostForm screenProps={screenProps}/> }/>
                                 <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
+                                <Drawer.Screen options={{title: 'Buscador'}} name="Buscador" component={()=><Search /> } />
+                                
                             </Drawer.Navigator>
 
                             ) : ( 
