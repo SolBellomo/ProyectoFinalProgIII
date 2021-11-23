@@ -95,7 +95,7 @@ class Menu extends Component {
                 {
                     this.state.cargando ?
                         <ActivityIndicator size='large' color='blue'/>
-                    
+
                      : (
                         this.state.logged ? (
                             <Drawer.Navigator>
@@ -103,7 +103,7 @@ class Menu extends Component {
                                 <Drawer.Screen options={{title: 'Nuevo Post'}} name="Nuevo Post" component={()=> <NewPostForm/> }/>
                                 <Drawer.Screen options={{title: 'Mi Perfil'}} name="Mi Perfil" component={()=><Profile user={this.state.user} logout={ () => this.logout()} />} />
                             </Drawer.Navigator>
-                            
+
                             ) : ( 
                             <Drawer.Navigator>
                                 <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
