@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
-import { auth } from '../firebase/config'
+import { auth } from '../firebase/config';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {} from '@fortawesome/free-brands-svg-icons';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 class Profile extends Component {
 
@@ -14,17 +18,28 @@ class Profile extends Component {
       console.log(auth.currentUser)
       return (
         <View style={styles.container}>
+
+            <Text style={styles.user} ><FontAwesomeIcon icon={faUserCircle} /></Text>
+            <Text style={styles.elemt}>{auth.currentUser.displayName}</Text>
          
-         
-          <Text style={styles.element}> Email: {auth.currentUser.email}</Text>
-          <Text style={styles.elemt}> Nombre de usuario: {auth.currentUser.displayName}</Text>
-         <Text styles={styles.element}> Usuario creado el: {auth.currentUser.metadata.creationTime}</Text>
-          <Text style={styles.elemt}> Ultimo login: {auth.currentUser.metadata.lastSignInTime}</Text>
+            <Text style={styles.element}>{auth.currentUser.email}</Text>
+            <Text style={styles.element}> Usuario creado el: {auth.currentUser.metadata.creationTime}</Text>
+            <Text style={styles.element}> Ultimo login: {auth.currentUser.metadata.lastSignInTime}</Text>
           
+            
+            {/*Posteos creados por el usuario*/}
+              <Image 
+                style={{flex: 1, width: 300, height:250}}
+                source={{uri: this.props.postData.data.photo}}
+              />
+
+              <Text style={styles.title}> {auth.currentUser.props.postData.data.title}</Text>
+              <Text style={styles.description}> {this.props.postData.data.description}</Text>
+
               
-          <TouchableOpacity style={styles.button} onPress={() => this.props.logout()}>
-            <Text style={styles.textButton}>Logout</Text>
-          </TouchableOpacity>
+            <TouchableOpacity style={styles.button} onPress={() => this.props.logout()}>
+              <Text style={styles.textButton}>Logout</Text>
+            </TouchableOpacity>
          </View> 
 
           )
@@ -32,6 +47,20 @@ class Profile extends Component {
     }
 
     const styles= StyleSheet.create({
+      user: {
+        alignSelf: 'center',
+        fontSize: 70,
+      },
+
+      elemt:{
+        alignSelf: 'center',
+        fontSize: 30,
+      },
+
+      element: {
+        alignSelf: 'center',
+      },
+
       button: {
         backgroundColor: "#405DE6",
         marginHorizontal: 100,
