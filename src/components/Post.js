@@ -105,14 +105,14 @@ class Post extends Component {
 
                     <TouchableOpacity style={styles.likeButton} onPress={()=>this.likePosts()}>
                         <Text style={{color:'black',}}><FontAwesomeIcon icon={faHeart}/></Text>
-                        <Text style={styles.likeButton}>{this.state.likes} </Text>
+                        <Text> {this.state.likes} </Text>
 
                     </TouchableOpacity>:
 
                     <TouchableOpacity style={styles.likeButton} onPress={()=>this.unLikePosts()}>
 
                         <Text style={{color:'red',}}><FontAwesomeIcon icon={faHeart}/></Text>
-                        <Text style={styles.likeButton}>{this.state.likes} </Text>
+                        <Text> {this.state.likes} </Text>
 
                     </TouchableOpacity>}
 
