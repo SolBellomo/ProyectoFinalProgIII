@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import { auth } from '../firebase/config';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -57,18 +57,24 @@ class Profile extends Component {
           
             
             {/*Posteos creados por el usuario*/}
-              <Image 
+              {/* <Image 
                 style={{flex: 1, width: 300, height:250}}
                 source={{uri: this.props.postData.data.photo}}
               />
-
-              <Text style={styles.title}> {auth.currentUser.props.postData.data.title}</Text>
+ */}
+              {/* <Text style={styles.title}> {auth.currentUser.props.postData.data.title}</Text>
               <Text style={styles.description}> {this.props.postData.data.description}</Text>
 
               
             <TouchableOpacity style={styles.button} onPress={() => this.props.logout()}>
               <Text style={styles.textButton}>Logout</Text>
             </TouchableOpacity>
+            */}
+            <FlatList 
+                data={this.state.posts}
+                keyExtractor={(post) => post.id}            
+                renderItem = {({item})=> <Post postData={item}/>}
+            />
          </View> 
 
           )
