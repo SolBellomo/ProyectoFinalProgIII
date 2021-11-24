@@ -45,19 +45,49 @@ class CommentForm extends Component {
 
 
         <View style={styles.campos}>
+            { this.props.comments.length > 0 ? (
+              <FlatList 
+              data={this.props.comments}
+              keyExtractor={(com) => com.id}            
+              renderItem = {({item})=> (
+                <Text>  
+                  <Text>
+                    {item.author}
+                  </Text>
+                  <Text>
+                    {item.comment}
+                  </Text>
+                  
+                </Text>
+              )}
+          />
+            ) :           
+            <Text>No existen comentarios</Text>
+            }
+            
 
             <TextInput style={styles.input}
               onChangeText={(text) => this.setState({ comments: text })}
               placeholder= "Insertar comentario"
               keyboardType="default" 
+              value={this.state.comments}
             />
             
-            <TouchableOpacity
+            <TouchableOpacity 
+              disabled={this.state.comments == '' ? true : false}
               style={styles.button}
               onPress={() => this.onComment()} //ejecuta la función onComment
             >
               <Text style={styles.textButton}>Comentar</Text>
             </TouchableOpacity>   
+
+            <TouchableOpacity style={styles.button} onPress={()=>this.props.close()}>
+                        <Text style={styles.textButton}>
+                        Ver menos
+                        </Text>    
+            </TouchableOpacity>
+
+            
 
         </View>
         
