@@ -19,20 +19,26 @@ class Post extends Component {
         }
     }
  componentDidMount(){
-     if(this.props.postData.data.likes){
-         this.setState({
-             likes: this.props.postData.data.likes.length,
-             myLike: this.props.postData.data.owner == auth.currentUser.email,
-         })
-    }else{
-        this.setState({
-            likes: this.props.postData.data.likes.length,
-            myLike: false,
-        })
-    }
+     this.reciveLikes();
  }
 
-  
+    reciveLikes(){
+        let likes = this.props.postData.data.likes;
+        if(likes){
+            this.setState({
+                likes: likes.length,
+
+            })
+        } if (likes.includes(auth.currentUser.email)
+        ){
+            this.setState({
+                myLike: true,
+            })
+        }
+    }
+       
+
+    
 
     
     likePosts(){
@@ -63,7 +69,7 @@ class Post extends Component {
                 likes: this.state.likes -1,
                 myLike: false
             })
-            console.log('likeado')
+            console.log('deslikeado')
         })
         .catch((error) => {
             console.error("Error updating document: ", error);
