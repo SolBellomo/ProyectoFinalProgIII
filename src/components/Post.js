@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Text, View, TouchableOpacity,  StyleSheet, Image, ActivityIndicator, Modal} from 'react-native';
+import { Text, View, TouchableOpacity,  StyleSheet, Image, ActivityIndicator, Modal, FlatList } from 'react-native';
 import firebase from 'firebase';
 import { db, auth } from '../firebase/config';
 import CommentForm from '../components/CommentForm';
@@ -16,6 +16,7 @@ class Post extends Component {
         this.state = {
             likes: 0,
             myLike: false,
+            onComment: false,
         }
     }
  componentDidMount(){
@@ -76,6 +77,7 @@ class Post extends Component {
         });
 
     }
+    
     deletePost(){
         db.collection('posts').doc(this.props.postData.id).delete().then(() => {
             console.log("Document successfully deleted!");
@@ -97,9 +99,6 @@ class Post extends Component {
                         style={{flex: 1, width: 300, height:250}}
                         source={{uri: this.props.postData.data.photo}}
                     />
-
-                    <Text style={styles.title}> {this.props.postData.data.title}</Text>
-                    <Text style={styles.description}> {this.props.postData.data.description}</Text>
                      
                     {!this.state.myLike ?
 
@@ -116,16 +115,26 @@ class Post extends Component {
 
                     </TouchableOpacity>}
 
+                    <Text style={styles.title}> {this.props.postData.data.title}</Text>
+                    <Text style={styles.description}> {this.props.postData.data.description}</Text>
+
                     <TouchableOpacity style={styles.button} onPress={()=>this.deletePost()}>
                         <Text style={styles.textButton}>
                         Borrar post
                         </Text>    
                     </TouchableOpacity>
-                    <Modal visible={false} animationType="slide" transparent={false}>
-                        
-                    <CommentForm postId={this.props.postData.id} />
-                        
-                     </Modal>
+
+                    <Modal visible={false} animationType="slide" transparent={false} style={styles.comentarios}>
+                        <Text>Comentarios</Text>
+
+                        <CommentForm postId={this.props.postData.id} />
+                            
+                        <FlatList 
+                            data={this.state.comments}
+                            keyExtractor={(com) => com.id}            
+                            renderItem = {({item})=> <CommentForm postId={item}/>}
+                        />
+                    </Modal>
                    
                     
 
@@ -148,9 +157,20 @@ const styles = StyleSheet.create({
         borderRadius: 12,
     },
 
+    comentarios: {
+        borderColor: 'transparent',
+        alignSelf: 'center',
+        marginTop: '20%',
+    },
+
     title: {
         fontWeight: 500,
-        marginTop: 10,
+        marginTop: '1%',
+        alignSelf: 'flex-start',
+    },
+
+    description: {
+        alignSelf: 'flex-start',
     },
 
     button: {
@@ -173,6 +193,7 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: 10,
         flexWrap: "wrap",
+        alignSelf: 'flex-start',
     },
 
     user: {
