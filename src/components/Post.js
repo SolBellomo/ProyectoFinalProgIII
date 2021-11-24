@@ -76,7 +76,6 @@ class Post extends Component {
         });
 
     }
-    
     deletePost(){
         db.collection('posts').doc(this.props.postData.id).delete().then(() => {
             console.log("Document successfully deleted!");
