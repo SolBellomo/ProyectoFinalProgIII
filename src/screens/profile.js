@@ -14,6 +14,35 @@ class Profile extends Component {
       }
     }
 
+    
+  misFotos(){
+  db.collection('posts')
+      .where('username','==', currentUser)
+      .orderBy('createdAt', 'desc')
+      .limit(8)
+      .onSnapshot(
+
+     docs => {
+          let posts=[];
+          docs.forEach(doc => {
+              posts.push({
+                  id: doc.id,
+                  data: doc.data()
+
+              })
+          })
+          this.setState({
+            posteos: posts,
+            loading: false
+          })
+        
+      })
+  }
+
+      
+
+
+
     render(){
       console.log(auth.currentUser)
       return (
