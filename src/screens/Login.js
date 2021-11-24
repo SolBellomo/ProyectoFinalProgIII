@@ -17,9 +17,6 @@ class Login extends Component {
     this.props.screenProps.navigation.navigate('Register')
   }
 
-  navigateToPasswordRecovery(){
-    this.props.screenProps.navigation.navigate('PasswordRecovery')
-  }
   
   render() {
     return (
@@ -48,11 +45,6 @@ class Login extends Component {
             <TouchableOpacity style={styles.regis} onPress={() => this.props.screenProps.navigation.navigate('Register')}>
               <Text style={styles.registro}>
                   ¿No tenés una cuenta? Registrate
-              </Text>
-            </TouchableOpacity> 
-            <TouchableOpacity style={styles.contra} onPress={() => this.props.screenProps.navigation.navigate('PasswordRecovery')}>
-              <Text style={styles.registro}>
-                  ¿Olvidaste tu contraseña?
               </Text>
             </TouchableOpacity> 
         </View>

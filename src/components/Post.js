@@ -1,22 +1,13 @@
 import React, { Component } from "react";
 
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  ActivityIndicator,
-  Modal,
-  FlatList,
-} from "react-native";
+import { Text, View, TouchableOpacity, StyleSheet, Image, ActivityIndicator, Modal, FlatList } from "react-native";
 import firebase from "firebase";
 import { db, auth } from "../firebase/config";
 import CommentForm from "../components/CommentForm";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {} from "@fortawesome/free-brands-svg-icons";
-import { faHeart, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faUserCircle, faComment } from "@fortawesome/free-solid-svg-icons";
 
 class Post extends Component {
   constructor(props) {
@@ -109,8 +100,6 @@ class Post extends Component {
   }
 
   render() {
-    console.log(this.props.postData);
-    console.log(this.state.comments);
     return (
       <View style={styles.container}>
         <Text style={styles.user}>
@@ -132,7 +121,14 @@ class Post extends Component {
               <FontAwesomeIcon icon={faHeart} />
             </Text>
             <Text> {this.state.likes} </Text>
+
+
+            <TouchableOpacity onPress={() => this.showModal()}>
+              <Text>  <FontAwesomeIcon icon={ faComment} /></Text>
+            </TouchableOpacity>
+            
           </TouchableOpacity>
+          
         ) : (
           <TouchableOpacity
             style={styles.likeButton}
@@ -142,9 +138,15 @@ class Post extends Component {
               <FontAwesomeIcon icon={faHeart} />
             </Text>
             <Text> {this.state.likes} </Text>
+
+            <TouchableOpacity onPress={() => this.showModal()}>
+              <Text>  <FontAwesomeIcon icon={ faComment} /></Text>
+            </TouchableOpacity>
+
           </TouchableOpacity>
         )}
-
+        
+        
         <Text style={styles.title}> {this.props.postData.data.title}</Text>
         <Text style={styles.description}>
           {" "}
@@ -158,13 +160,6 @@ class Post extends Component {
           <Text style={styles.textButton}>Borrar post</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => this.showModal()}
-        >
-          <Text style={styles.textButton}>Ver más</Text>
-        </TouchableOpacity>
-
         {this.state.showModal ? (
           <Modal
             visible={this.state.showModal}
@@ -172,7 +167,7 @@ class Post extends Component {
             transparent={false}
             style={styles.comentarios}
           >
-            <Text>Comentarios</Text>
+            <Text style={styles.commentitle}>Comentarios</Text>
 
             <CommentForm
               postId={this.props.postData.id}
@@ -180,9 +175,7 @@ class Post extends Component {
               close={() => this.closeModal()}
             />
           </Modal>
-        ) : (
-            null
-        )}
+        ) : null}
       </View>
     );
   }
@@ -205,7 +198,13 @@ const styles = StyleSheet.create({
   comentarios: {
     borderColor: "transparent",
     alignSelf: "center",
-    marginTop: "20%",
+    marginTop: "1%",
+  },
+
+  commentitle: {
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1,
+    fontWeight: 500,
   },
 
   title: {
@@ -228,6 +227,7 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderColor: "#fff",
     marginTop: 10,
+    alignSelf: "flex-end",
   },
 
   textButton: {

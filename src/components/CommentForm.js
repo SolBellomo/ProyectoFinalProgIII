@@ -1,117 +1,110 @@
 import React, { Component } from "react";
-import {Text, View, TextInput, TouchableOpacity, StyleSheet, Image, FlatList } from "react-native";
-import firebase from 'firebase';
-import { db, auth } from '../firebase/config';
-
+import {
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  FlatList,
+} from "react-native";
+import firebase from "firebase";
+import { db, auth } from "../firebase/config";
 
 class CommentForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comments: '',
-    
+      comments: "",
     };
   }
-  
-  onComment(){
 
+  onComment() {
     let comment = {
-        createdAt: Date.now(),
-        author: auth.currentUser.displayName,
-        comment: this.state.comments, 
-    }
+      createdAt: Date.now(),
+      author: auth.currentUser.displayName,
+      comment: this.state.comments,
+    };
 
-    db.collection('posts').doc(this.props.postId).update({ //llama al posteo de la colección 
+    db.collection("posts")
+      .doc(this.props.postId)
+      .update({
+        //llama al posteo de la colección
         comments: firebase.firestore.FieldValue.arrayUnion(comment), //llamo al objeto literal de comment que armé
         //agrega a la lista de comments el nuevo comentario
-    })
-    .then(() => {
+      })
+      .then(() => {
         this.setState({
-            comments: '',
+          comments: "",
         });
-    });
-
+      });
   }
 
-  /*deleteComment(){
-    db.collection('posts').doc(this.props.postid).update({
 
-    })
-  }*/
-  
   render() {
     return (
-      <View>
-
-
+      <View style={styles.commentAll}>
         <View style={styles.campos}>
-            { this.props.comments.length > 0 ? (
-              <FlatList 
+          {this.props.comments.length > 0 ? (
+            <FlatList
               data={this.props.comments}
-              keyExtractor={(com) => com.id}            
-              renderItem = {({item})=> (
-                <Text>  
-                  <Text>
-                    {item.author}
-                  </Text>
-                  <Text>
-                    {item.comment}
-                  </Text>
-                  
+              keyExtractor={(com) => com.id}
+              renderItem={({ item }) => (
+                <Text style={styles.commentBox}>
+                  <Text style={styles.user}>{item.author} </Text>
+                  <Text>{item.comment}</Text>
                 </Text>
               )}
-          />
-            ) :           
-            <Text>No existen comentarios</Text>
-            }
-            
-
-            <TextInput style={styles.input}
-              onChangeText={(text) => this.setState({ comments: text })}
-              placeholder= "Insertar comentario"
-              keyboardType="default" 
-              value={this.state.comments}
             />
-            
-            <TouchableOpacity 
-              disabled={this.state.comments == '' ? true : false}
-              style={styles.button}
-              onPress={() => this.onComment()} //ejecuta la función onComment
-            >
-              <Text style={styles.textButton}>Comentar</Text>
-            </TouchableOpacity>   
+          ) : (
+            <Text>No existen comentarios</Text>
+          )}
 
-            <TouchableOpacity style={styles.button} onPress={()=>this.props.close()}>
-                        <Text style={styles.textButton}>
-                        Ver menos
-                        </Text>    
-            </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.close()}>
+            <Text style={styles.textButton}>Ver menos</Text>
+          </TouchableOpacity>
 
-            
+          <TextInput
+            style={styles.input}
+            onChangeText={(text) => this.setState({ comments: text })}
+            placeholder="Insertar comentario"
+            keyboardType="default"
+            value={this.state.comments}
+          />
 
+          <TouchableOpacity
+            disabled={this.state.comments == "" ? true : false}
+            style={styles.button}
+            onPress={() => this.onComment()} //ejecuta la función onComment
+          >
+            <Text style={styles.textButton}>Comentar</Text>
+          </TouchableOpacity>
         </View>
-        
       </View>
     );
   }
 }
 const styles = StyleSheet.create({
   input: {
-    borderColor: 'grey',
-    borderStyle: 'solid',
+    borderColor: "grey",
+    borderStyle: "solid",
     borderWidth: 1,
-    minHeight: 'auto',
-    backgroundColor: 'white',
-    minWidth: '90%',
+    minHeight: "auto",
+    backgroundColor: "white",
+    minWidth: "90%",
+  },
+
+  commentAll: {
+    width: '100%',
   },
 
   campos: {
-    alignItems: "center", 
+    alignItems: "center",
     marginBottom: 50,
     padding: 10,
   },
 
-  image:{
+  image: {
     height: 300,
     marginTop: 40,
   },
@@ -121,13 +114,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     paddingHorizontal: 10,
     paddingVertical: 6,
-    textAlign: 'center',
+    textAlign: "center",
     borderRadius: 4,
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: "#fff",
-    width: '50%',
-    alignSelf: 'flex-end',
+    width: "50%",
+    alignSelf: "flex-end",
   },
 
   textButton: {
@@ -137,16 +130,15 @@ const styles = StyleSheet.create({
   input: {
     marginTop: 5,
     marginBottom: 5,
-    borderColor: 'grey',
-    borderStyle: 'solid',
+    borderColor: "grey",
+    borderStyle: "solid",
     borderWidth: 1,
-    width: '90%',
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 4,
   },
 
-  regis:{
+  regis: {
     marginHorizontal: 10,
     marginTop: 5,
     marginBottom: 5,
@@ -155,8 +147,15 @@ const styles = StyleSheet.create({
   registro: {
     color: "#405DE6",
   },
+  
+  user:{
+    fontWeight: 500,
+  },
+
+  commentBox:{
+    alignSelf: 'flex-start',
+  }, 
 
 });
-
 
 export default CommentForm;
