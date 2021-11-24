@@ -27,44 +27,55 @@ class Post extends Component {
     }else{
         this.setState({
             likes: this.props.postData.data.likes.length,
-            myLike: false
+            myLike: false,
         })
     }
  }
 
+  
+
+    
     likePosts(){
-        /* let post = db.collection("posteos").doc(this.props.postData.id) */
-        db.collection('posts').doc(this.props.postData.id).update({
-            likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-        })
-        .then(()=>{
-            this.setState({
-                myLike: true,
-                likes: this.props.postData.data.likes.length,
-                
-            })
-        })
-    }
-
-    unlikePosts(){
-
-        db.collection('posts').doc(this.props.postData.id).update({
+        let post = db.collection('posts').doc(this.props.postData.id);
+        post.update({
             likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
         })
-        .then(()=>{
+        .then(() =>{
             this.setState({
-                myLike: false,
-                likes: this.props.postData.data.likes.length,
-                
+                likes: this.state.likes +1,
+                myLike: true
             })
+            console.log('likeado')
         })
-    }
+        .catch((error) => {
+            console.error("Error updating document: ", error);
+        });
 
+    }
+    
+    unLikePosts(){
+        let post = db.collection('posts').doc(this.props.postData.id);
+        post.update({
+            likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
+        })
+        .then(() =>{
+            this.setState({
+                likes: this.state.likes -1,
+                myLike: false
+            })
+            console.log('likeado')
+        })
+        .catch((error) => {
+            console.error("Error updating document: ", error);
+        });
+
+    }
     deletePost(){
         db.collection('posts').doc(this.props.postData.id).delete().then(() => {
             console.log("Document successfully deleted!");
         })
     }
+
 
 
     render(){
@@ -88,13 +99,14 @@ class Post extends Component {
 
                     <TouchableOpacity style={styles.likeButton} onPress={()=>this.likePosts()}>
                         <Text style={{color:'black',}}><FontAwesomeIcon icon={faHeart}/></Text>
-                        <Text style={styles.likes}>{this.state.likes} </Text>
+                        <Text style={styles.likeButton}>{this.state.likes} </Text>
 
                     </TouchableOpacity>:
-                    <TouchableOpacity style={styles.likeButton} onPress={()=>this.unlikePosts()}>
+
+                    <TouchableOpacity style={styles.likeButton} onPress={()=>this.unLikePosts()}>
 
                         <Text style={{color:'red',}}><FontAwesomeIcon icon={faHeart}/></Text>
-                        <Text style={styles.likes}>{this.state.likes} </Text>
+                        <Text style={styles.likeButton}>{this.state.likes} </Text>
 
                     </TouchableOpacity>}
 

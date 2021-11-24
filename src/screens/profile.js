@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
-import { auth } from '../firebase/config';
+import { db, auth } from '../firebase/config';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {} from '@fortawesome/free-brands-svg-icons';
@@ -11,13 +11,17 @@ class Profile extends Component {
     constructor(props) {
       super(props);
       this.state = {
+        posts: "",
       }
     }
 
-    
+  componentDidMount(){
+    this.misFotos();
+    }
+
   misFotos(){
   db.collection('posts')
-      .where('username','==', currentUser)
+      .where('username','==', auth.currentUser)
       .orderBy('createdAt', 'desc')
       .limit(8)
       .onSnapshot(
@@ -54,6 +58,7 @@ class Profile extends Component {
             <Text style={styles.element}>{auth.currentUser.email}</Text>
             <Text style={styles.element}> Usuario creado el: {auth.currentUser.metadata.creationTime}</Text>
             <Text style={styles.element}> Ultimo login: {auth.currentUser.metadata.lastSignInTime}</Text>
+           
           
             
             
