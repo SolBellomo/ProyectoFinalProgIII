@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-
 import { Text, View, TouchableOpacity, StyleSheet, Image, ActivityIndicator, Modal, FlatList } from "react-native";
 import firebase from "firebase";
 import { db, auth } from "../firebase/config";
 import CommentForm from "../components/CommentForm";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {} from "@fortawesome/free-brands-svg-icons";
 import { faHeart, faUserCircle, faComment } from "@fortawesome/free-solid-svg-icons";
@@ -42,7 +40,7 @@ class Post extends Component {
     let post = db.collection("posts").doc(this.props.postData.id);
     post
       .update({
-        likes: firebase.firestore.FieldValue.arrayRemove(
+        likes: firebase.firestore.FieldValue.arrayUnion(
           auth.currentUser.email
         ),
       })
