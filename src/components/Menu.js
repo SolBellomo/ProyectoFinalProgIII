@@ -109,10 +109,6 @@ class Menu extends Component {
 
                             ) : ( 
                             <Drawer.Navigator>
-                                <Drawer.Screen /> 
-                                <form>
-                                    <input type="text" id="filter" placeholder="Search for..." ref={input => this.search = input} onChange={this.handleInputChange}/>
-                                </form>
                                 <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
                                 <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass,username)=>this.register(email,pass,username)} />} />
                                 <Drawer.Screen options={{title: 'Recuperar Contraseña'}} name='PasswordRecovery' component={() => <PasswordRecovery recuperarContraseña={(email, pass) => this.PasswordRecovery(email, pass)} /> } />

@@ -29,7 +29,7 @@ class Post extends Component {
                 likes: likes.length,
 
             })
-        } if (likes.incluldes(auth.currentUser.email)
+        } if (likes.includes(auth.currentUser.email)
         ){
             this.setState({
                 myLike: true,
