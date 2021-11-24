@@ -1,6 +1,6 @@
 
 import React, {Component} from "react";
-import {View, Text, ActivityIndicator, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import {View, Text, ActivityIndicator, StyleSheet, TextInput, TouchableOpacity, FlatList} from 'react-native';
 
 import {db} from '../firebase/config';
 
@@ -21,7 +21,7 @@ class Search extends Component{
     }
     
     search(text){
-        db.collection('posts').where('username','==', text).get().then(docs => {
+        db.collection('posts').where('ownerNik','==', this.state.input).get().then(docs => {
             let posts=[];
             docs.forEach(doc => {
                 posts.push({
@@ -48,17 +48,24 @@ class Search extends Component{
     
             <View style={styles.campos}>
                 <TextInput style={styles.input}
-                  onChangeText={(text) => this.setState({ email: text })}
+                  onChangeText={(text) => this.setState({ input : text })}
                   placeholder= "Insertar Usuario"
                   keyboardType="email-address" 
                 />
               
                 <TouchableOpacity
                   style={styles.button}
-                 
+                 onPress={()=> this.search()}
                 >
-                  <Text style={styles.textButton}>Buscar</Text>
+                  <Text style={styles.textButton} >Buscar</Text>
                 </TouchableOpacity>   
+                
+
+                <FlatList 
+                data={this.state.posts}
+                keyExtractor={(post) => post.id}            
+                renderItem = {({item})=> <Post postData={item}/>}
+            />
                 
             </View>
             

@@ -87,6 +87,9 @@ class Post extends Component {
     render(){
         console.log(this.props.postData) 
         return(
+
+            
+            
              
                 <View style={styles.container}>
                  
@@ -128,9 +131,9 @@ class Post extends Component {
                      </Modal>
                    
                     
-
+                
                 </View>
-
+            
         )
     }
 }
