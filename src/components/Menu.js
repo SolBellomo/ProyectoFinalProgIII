@@ -95,7 +95,7 @@ class Menu extends Component {
             <>
                 {
                     this.state.cargando ?
-                        <ActivityIndicator size='large' color='blue'/>
+                        <ActivityIndicator size='large' color='blue' style={styles.loader}/>
 
                      : (
                         this.state.logged ? (
@@ -120,6 +120,10 @@ class Menu extends Component {
         )}
 }
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    loader: {
+        marginTop: 200,
+    },
+})
 
 export default Menu;

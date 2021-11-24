@@ -17,7 +17,7 @@ class CommentForm extends Component {
 
     let comment = {
         createdAt: Date.now(),
-        author: auth.currentUser.email,
+        author: auth.currentUser.displayName,
         comment: this.state.comments, 
     }
 
@@ -41,9 +41,11 @@ class CommentForm extends Component {
   
   render() {
     return (
-      <View style={styles.inicioSesion}>
+      <View>
+
 
         <View style={styles.campos}>
+
             <TextInput style={styles.input}
               onChangeText={(text) => this.setState({ comments: text })}
               placeholder= "Insertar comentario"
@@ -64,16 +66,13 @@ class CommentForm extends Component {
   }
 }
 const styles = StyleSheet.create({
-  inicioSesion: {
+  input: {
     borderColor: 'grey',
     borderStyle: 'solid',
     borderWidth: 1,
-    marginLeft: 50,
-    marginTop: 30,
-    marginRight: 50,
-    borderRadius: 20,
     minHeight: 'auto',
     backgroundColor: 'white',
+    minWidth: '90%',
   },
 
   campos: {
@@ -92,13 +91,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     paddingHorizontal: 10,
     paddingVertical: 6,
-    textAlign: "center",
+    textAlign: 'center',
     borderRadius: 4,
     borderWidth: 1,
     borderStyle: "solid",
     borderColor: "#fff",
-    width: '90%',
-    marginTop: 20,
+    width: '50%',
+    alignSelf: 'flex-end',
   },
 
   textButton: {

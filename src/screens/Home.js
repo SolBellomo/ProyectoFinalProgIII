@@ -15,6 +15,7 @@ class Home extends Component {
 
     componentDidMount() {
       this.showPost();
+      this.showComments();
     }
 
     showPost() {
@@ -32,6 +33,21 @@ class Home extends Component {
       })
     }
 
+    showComments(){
+        db.collection('comments').onSnapshot((comm) => {
+          let comments = []
+          comm.forEach((com) => {
+              comments.push({
+                  id: com.id,
+                  data: com.data()
+              })
+          })
+          this.setState({
+              comments: comments
+          })
+      })
+    }
+
     render(){
         return(
 
@@ -40,11 +56,6 @@ class Home extends Component {
                 data={this.state.posts}
                 keyExtractor={(post) => post.id}            
                 renderItem = {({item})=> <Post postData={item}/>}
-            />
-            <FlatList 
-                data={this.state.comments}
-                keyExtractor={(com) => com.id}            
-                renderItem = {({item})=> <CommentForm postId={item}/>}
             />
             </View>
         )            
@@ -75,7 +86,7 @@ const styles = StyleSheet.create({
 
     touchableText:{
         fontWeight: 'bold'
-    }
+    },
 });
 
 export default Home;
