@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, TouchableOpacity, StyleSheet, FlatList} from 'react-native';
 import { db, auth } from '../firebase/config';
+import Post from '../components/Post';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {} from '@fortawesome/free-brands-svg-icons';
@@ -11,22 +12,20 @@ class Profile extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        posts: "",
+        posts: [],
       }
     }
 
   componentDidMount(){
-    this.misFotos();
-    }
-
-  misFotos(){
-  db.collection('posts')
-      .where('username','==', auth.currentUser)
+    this.showPost();
+  }
+  
+  showPost(){
+    db.collection('posts')
+      .where('ownerNik','==', auth.currentUser.displayName)
       .orderBy('createdAt', 'desc')
       .limit(8)
-      .onSnapshot(
-
-     docs => {
+      .onSnapshot((docs) => {
           let posts=[];
           docs.forEach(doc => {
               posts.push({
@@ -36,7 +35,7 @@ class Profile extends Component {
               })
           })
           this.setState({
-            posteos: posts,
+            posts: posts,
             loading: false
           })
         
@@ -44,9 +43,6 @@ class Profile extends Component {
   }
 
       
-
-
-
     render(){
       console.log(auth.currentUser)
       return (
@@ -58,28 +54,23 @@ class Profile extends Component {
             <Text style={styles.element}>{auth.currentUser.email}</Text>
             <Text style={styles.element}> Usuario creado el: {auth.currentUser.metadata.creationTime}</Text>
             <Text style={styles.element}> Ultimo login: {auth.currentUser.metadata.lastSignInTime}</Text>
-           
           
             
-            
-               {/* <Image 
-                style={{flex: 1, width: 300, height:250}}
-                source={{uri: this.props.postData.data.photo}}
-              />
- 
-               <Text style={styles.title}> {auth.currentUser.props.postData.data.title}</Text>
-              <Text style={styles.description}> {this.props.postData.data.description}</Text>
-
               
-            <TouchableOpacity style={styles.button} onPress={() => this.props.logout()}>
-              <Text style={styles.textButton}>Logout</Text>
-            </TouchableOpacity> */}
-            
-            <FlatList 
+              <Text>Cantidad de posteos: {this.state.posts.length }</Text>
+              
+              <FlatList 
                 data={this.state.posts}
                 keyExtractor={(post) => post.id}            
                 renderItem = {({item})=> <Post postData={item}/>}
-            />
+              />
+            
+
+            <TouchableOpacity style={styles.button} onPress={() => this.props.logout()}>
+                <Text style={styles.textButton}>Logout</Text>
+            </TouchableOpacity> 
+
+
          </View> 
 
           )
