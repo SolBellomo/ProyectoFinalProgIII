@@ -54,12 +54,10 @@ class Profile extends Component {
             <Text style={styles.element}>{auth.currentUser.email}</Text>
             <Text style={styles.element}> Usuario creado el: {auth.currentUser.metadata.creationTime}</Text>
             <Text style={styles.element}> Ultimo login: {auth.currentUser.metadata.lastSignInTime}</Text>
-          
-            
-              
-              <Text>Cantidad de posteos: {this.state.posts.length }</Text>
+            <Text style={styles.element} >Cantidad de posteos: {this.state.posts.length }</Text>
               
               <FlatList 
+               style={styles.posts}
                 data={this.state.posts}
                 keyExtractor={(post) => post.id}            
                 renderItem = {({item})=> <Post postData={item}/>}
@@ -83,6 +81,18 @@ class Profile extends Component {
         fontSize: 70,
       },
 
+      posts:{
+      marginTop: 80,
+      textAlign: 'center',
+      padding: 10,
+      backgroundColor: 'white',
+      },
+      container:{
+        textAlign: 'center',
+        padding: 10,
+        backgroundColor: 'white',
+        },
+
       elemt:{
         alignSelf: 'center',
         fontSize: 30,
@@ -90,6 +100,7 @@ class Profile extends Component {
 
       element: {
         alignSelf: 'center',
+        
       },
 
       button: {
