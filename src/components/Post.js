@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet, Image, ActivityIndicator, Mod
 import firebase from "firebase";
 import { db, auth } from "../firebase/config";
 import CommentForm from "../components/CommentForm";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {} from "@fortawesome/free-brands-svg-icons";
 import { faHeart, faUserCircle, faComment } from "@fortawesome/free-solid-svg-icons";

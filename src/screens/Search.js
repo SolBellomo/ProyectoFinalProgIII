@@ -1,9 +1,12 @@
 import React, {Component} from "react";
-import {View, Text, ActivityIndicator, StyleSheet, TextInput, TouchableOpacity, FlatList} from 'react-native';
+import {View, Text, StyleSheet, TextInput, TouchableOpacity, FlatList} from 'react-native';
 
 import {db} from '../firebase/config';
-
 import Post from "../Components/Post";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {} from "@fortawesome/free-brands-svg-icons";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 class Search extends Component{
     constructor(props){
@@ -40,11 +43,7 @@ class Search extends Component{
 
     render(){
         return(
-          
-            <View style={styles.inicioSesion}>
-
-          
-    
+            <View style={styles.search}>
             <View style={styles.campos}>
                 <TextInput style={styles.input}
                   onChangeText={(text) => this.setState({ input : text })}
@@ -56,7 +55,8 @@ class Search extends Component{
                   style={styles.button}
                  onPress={()=> this.search()}
                 >
-                  <Text style={styles.textButton} >Buscar</Text>
+                  <Text style={styles.textButton} >
+                    <FontAwesomeIcon icon={ faSearch } /> Buscar</Text>
                 </TouchableOpacity>   
                 
 
@@ -76,14 +76,13 @@ class Search extends Component{
 }
 
 const styles = StyleSheet.create({
-    inicioSesion: {
+    search: {
       borderColor: 'grey',
       borderStyle: 'solid',
       borderWidth: 1,
       marginLeft: 50,
       marginTop: 30,
       marginRight: 50,
-      borderRadius: 20,
       minHeight: 'auto',
       backgroundColor: 'white',
     },
@@ -92,6 +91,7 @@ const styles = StyleSheet.create({
       alignItems: "center", 
       marginBottom: 50,
       padding: 10,
+      marginTop: 40,
     },
   
     image:{
@@ -127,16 +127,6 @@ const styles = StyleSheet.create({
       paddingHorizontal: 10,
       paddingVertical: 6,
       borderRadius: 4,
-    },
-  
-    regis:{
-      marginHorizontal: 10,
-      marginTop: 5,
-      marginBottom: 5,
-    },
-  
-    registro: {
-      color: "#405DE6",
     },
   
   });
