@@ -151,12 +151,16 @@ class Post extends Component {
           {this.props.postData.data.description}
         </Text>
 
-        <TouchableOpacity
+        {this.props.postData.data.ownerNik === auth.currentUser.displayName ? 
+          <TouchableOpacity
           style={styles.button}
           onPress={() => this.deletePost()}
-        >
-          <Text style={styles.textButton}>Borrar post</Text>
-        </TouchableOpacity>
+          >
+            <Text style={styles.textButton}>Borrar post</Text>
+          </TouchableOpacity> : 
+          <Text></Text>
+        } 
+        
 
         {this.state.showModal ? (
           <Modal

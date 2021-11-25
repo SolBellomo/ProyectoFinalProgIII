@@ -1,4 +1,3 @@
-
 import React, {Component} from "react";
 import {View, Text, ActivityIndicator, StyleSheet, TextInput, TouchableOpacity, FlatList} from 'react-native';
 
@@ -144,4 +143,3 @@ const styles = StyleSheet.create({
 
 
 export default Search;
-    
