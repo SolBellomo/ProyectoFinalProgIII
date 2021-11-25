@@ -45,38 +45,45 @@ class Menu extends Component {
     
 
     register(email, userName, pass) {
-        auth.createUserWithEmailAndPassword(email, pass)
+        if( email === '' || pass === '' || userName === '' ){
+            alert('No puede quedar ningún campo vacío')
+        } else {
+            auth.createUserWithEmailAndPassword(email, pass)
             .then( res => {
                 res.user.updateProfile({
                     displayName: userName
                 })
             })
             .then(() => console.log('Usuario registrado exitosamente!'))
-            .catch(err => {
-                this.setState({registerError: err})
+            .catch((err) => {
+                console.log(err);
+                this.setState({
+                    errorCode: err.message, 
+                })
             })
+        }
     } 
 
     login(email, password) {
-        auth
-        .signInWithEmailAndPassword(email, password)
-        .then((response) => {
-            console.log('logueado')
-            console.log('response')
-            this.setState({
-                logged: true,
-                user: response.user,
+
+        if( email === '' || password === ''){
+            alert('No puede quedar ningún campo vacío')
+        } else  {
+            auth
+            .signInWithEmailAndPassword(email, password)
+            .then((response) => {
+                this.setState({
+                    logged: true,
+                    user: response.user,
+                }) 
             })
-        })
-                            
         .catch((err) => {
             console.log(err);
             this.setState({
-                errorMessage: error.message,
-                errorCode: error.code,
+                errorMessage: err.message, //de firebase
             })
         })
-    }
+    }}
 
     logout(){
         auth.signOut()
@@ -108,8 +115,8 @@ class Menu extends Component {
 
                             ) : ( 
                             <Drawer.Navigator>
-                                <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} login={(email,pass)=>this.login(email,pass)}/>} />
-                                <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register register={(email,pass,username)=>this.register(email,pass,username)} />} />
+                                <Drawer.Screen options={{title: 'Login'}} name="Login" component={(screenProps)=><Login screenProps={screenProps} errorMessage={ this.state.errorMessage } login={(email,pass)=>this.login(email,pass)}/>} />
+                                <Drawer.Screen options={{title: 'Register'}} name="Register" component={()=><Register errorCode={ this.state.errorCode } register={(email,pass,username)=>this.register(email,pass,username)} />} />
                             </Drawer.Navigator>
                             )
                      )

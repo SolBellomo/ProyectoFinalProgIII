@@ -43,11 +43,8 @@ class Register extends Component {
               <Text style={styles.textButton}>Registrarse</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={styles.recordar} >
-              <Text style={styles.record}>
-                  Recordar nombre de usuario
-              </Text>
-            </TouchableOpacity>
+            <Text style={styles.errorCode}>{this.props.errorCode}</Text>
+
         </View>
         
       </View>
@@ -124,6 +121,10 @@ const styles = StyleSheet.create({
     color: "#405DE6",
   },
 
+  errorCode: {
+    color: 'red',
+  },
+  
 });
 
 export default Register;

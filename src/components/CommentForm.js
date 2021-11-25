@@ -61,7 +61,7 @@ class CommentForm extends Component {
           )}
 
           <TouchableOpacity onPress={() => this.props.close()}>
-            <Text style={styles.textButton}>Ver menos</Text>
+            <Text style={styles.verMenos}>Ver menos</Text>
           </TouchableOpacity>
 
           <TextInput
@@ -125,6 +125,10 @@ const styles = StyleSheet.create({
 
   textButton: {
     color: "#fff",
+  },
+
+  verMenos: {
+    color: 'blue',
   },
 
   input: {

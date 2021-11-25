@@ -30,18 +30,23 @@ class Login extends Component {
               placeholder= "email"
               keyboardType="email-address" 
             />
+
             <TextInput style={styles.input}
               onChangeText={(text) => this.setState({ password: text })}
               placeholder="password"
               keyboardType="email-address"
               secureTextEntry={true}
             />
+
             <TouchableOpacity
               style={styles.button}
               onPress={() => this.props.login(this.state.email, this.state.password)}
             _>
               <Text style={styles.textButton}>Iniciar Sesión</Text>
             </TouchableOpacity>   
+
+            <Text style={styles.errorMessage}>{this.props.errorMessage}</Text>
+
             <TouchableOpacity style={styles.regis} onPress={() => this.props.screenProps.navigation.navigate('Register')}>
               <Text style={styles.registro}>
                   ¿No tenés una cuenta? Registrate
@@ -116,6 +121,10 @@ const styles = StyleSheet.create({
   registro: {
     color: "#405DE6",
   },
+
+  errorMessage: {
+    color: 'red',
+  }
 
 });
 

@@ -6,7 +6,7 @@ import CommentForm from "../components/CommentForm";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {} from "@fortawesome/free-brands-svg-icons";
-import { faHeart, faUserCircle, faComment } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faUserCircle, faComment, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 class Post extends Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class Post extends Component {
       onComment: false,
       comments: [],
       showModal: false,
+
     };
   }
   componentDidMount() {
@@ -157,7 +158,9 @@ class Post extends Component {
           style={styles.button}
           onPress={() => this.deletePost()}
           >
-            <Text style={styles.textButton}>Borrar post</Text>
+            <Text style={styles.textButton}>
+              <FontAwesomeIcon icon={ faTrash }/>
+            </Text>
           </TouchableOpacity> : 
           <Text></Text>
         } 
@@ -193,7 +196,7 @@ const styles = StyleSheet.create({
     padding: 50,
     flex: 2,
     display: "flex",
-    marginBottom: 10,
+    marginBottom: 5,
     borderRadius: 12,
     alignSelf: "center",
   },
@@ -221,7 +224,6 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: "#405DE6",
     paddingHorizontal: 10,
     paddingVertical: 6,
     textAlign: "center",
@@ -231,10 +233,12 @@ const styles = StyleSheet.create({
     borderColor: "#fff",
     marginTop: 10,
     alignSelf: "flex-end",
+    marginBottom: 0,
   },
 
   textButton: {
-    color: "#fff",
+    color: "red",
+    marginTop: 0,
   },
 
   likeButton: {
