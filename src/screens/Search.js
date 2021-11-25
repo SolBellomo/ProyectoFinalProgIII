@@ -43,7 +43,9 @@ class Search extends Component{
 
     render(){
         return(
+          
             <View style={styles.search}>
+              
             <View style={styles.campos}>
                 <TextInput style={styles.input}
                   onChangeText={(text) => this.setState({ input : text })}

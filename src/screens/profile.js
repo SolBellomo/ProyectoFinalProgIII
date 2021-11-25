@@ -24,7 +24,6 @@ class Profile extends Component {
     db.collection('posts')
       .where('ownerNik','==', auth.currentUser.displayName)
       .orderBy('createdAt', 'desc')
-      .limit(8)
       .onSnapshot((docs) => {
           let posts=[];
           docs.forEach(doc => {
@@ -54,7 +53,7 @@ class Profile extends Component {
             <Text style={styles.element}>{auth.currentUser.email}</Text>
             <Text style={styles.element}> Usuario creado el: {auth.currentUser.metadata.creationTime}</Text>
             <Text style={styles.element}> Ultimo login: {auth.currentUser.metadata.lastSignInTime}</Text>
-            <Text style={styles.element} >Cantidad de posteos: {this.state.posts.length }</Text>
+            <Text style={styles.cant} >Cantidad de posteos: {this.state.posts.length }</Text>
               
               <FlatList 
                style={styles.posts}
@@ -82,11 +81,11 @@ class Profile extends Component {
       },
 
       posts:{
-      marginTop: 80,
       textAlign: 'center',
       padding: 10,
       backgroundColor: 'white',
       },
+
       container:{
         textAlign: 'center',
         padding: 10,
@@ -96,6 +95,11 @@ class Profile extends Component {
       elemt:{
         alignSelf: 'center',
         fontSize: 30,
+      },
+
+      cant: {
+        fontWeight: 500,
+        marginTop: 10,
       },
 
       element: {

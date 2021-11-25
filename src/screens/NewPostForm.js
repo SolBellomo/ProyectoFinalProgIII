@@ -18,10 +18,10 @@ class NewPostForm extends Component {
     }
     
     submitPost(){
-        db.collection('posts').add({ //objeto literal con las propiedades que vamos a almacenar en la colección. Si la colección no existe, firebase la crea automáticamente cuando la ponés por primera vez.
+        db.collection('posts').add({ 
             owner: auth.currentUser.email,
             ownerNik: auth.currentUser.displayName,
-            createdAt: Date.now(), //hay que especificar cuando y quien creó el posteo ya que no hay relaciones entre tablas como en MySQL
+            createdAt: Date.now(), 
             title: this.state.title,
             description: this.state.description,
             likes: [],
@@ -36,7 +36,7 @@ class NewPostForm extends Component {
             // redirect
             this.props.screenProps.navigation.navigate('Home') 
         })
-        .catch() //hacer bien el catch
+        .catch() 
     }
 
     onImageUpload(url) {
